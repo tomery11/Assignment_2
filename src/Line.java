@@ -2,12 +2,20 @@ public class Line {
     private Point start;
     private Point end;
 
-
+    /**
+     * stringsToInts converts an array of strings to an array of ints.
+     * @param numbers  description
+     * @return int[]
+     */
     public Line(Point start, Point end){
         this.start = start;
         this.end = end;
     }
-
+    /**
+     * stringsToInts converts an array of strings to an array of ints.
+     * @param numbers  description
+     * @return int[]
+     */
     public Line(double x1, double y1, double x2, double y2){
         Point point_start = new Point(x1,y1);
         Point point_end = new Point(x2,y2);
@@ -16,27 +24,47 @@ public class Line {
 
     }
 
-
+    /**
+     * stringsToInts converts an array of strings to an array of ints.
+     * @param numbers  description
+     * @return int[]
+     */
     public double length(){
         return this.start.distance(this.end);
     }
-
+    /**
+     * stringsToInts converts an array of strings to an array of ints.
+     * @param numbers  description
+     * @return int[]
+     */
     public Point middle(){
         double x = Math.abs(this.start.getX() - this.end.getX()) / 2 + Math.min(this.start().getX(),this.end().getX());
         double y = Math.abs(this.start.getY() - this.end.getY()) / 2 + Math.min(this.start().getY(),this.end().getY());
         Point middle = new Point(x,y);
         return middle;
     }
-
+    /**
+     * stringsToInts converts an array of strings to an array of ints.
+     * @param numbers  description
+     * @return int[]
+     */
     public Point start(){
         return this.start;
     }
 
-
+    /**
+     * stringsToInts converts an array of strings to an array of ints.
+     * @param numbers  description
+     * @return int[]
+     */
     public Point end(){
         return this.end;
     }
-
+    /**
+     * stringsToInts converts an array of strings to an array of ints.
+     * @param numbers  description
+     * @return int[]
+     */
 
     boolean onLine(Point p, Point q, Point r)
     {
