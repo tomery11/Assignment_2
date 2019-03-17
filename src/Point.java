@@ -10,36 +10,36 @@ public class Point {
     private double y;
     /**
      * stringsToInts converts an array of strings to an array of ints.
-     * @param double x,y  description
+     * @param  x,y  description
      * @return int[]
      */
-    public Point( double x, double y){
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
     /**
      * stringsToInts converts an array of strings to an array of ints.
-     * @param numbers  description
+     * @param other  description
      * @return int[]
      */
-    public double distance(Point other){
-        double curr_x = this.x;
-        double curr_y= this.y;
-        double other_x = other.x;
-        double other_y = other.y;
-        double before_sqrt = Math.pow(Math.abs(curr_x-other_x),2) +
-                Math.pow(Math.abs(curr_y-other_y),2);
+    public double distance(Point other) {
+        double currX = this.x;
+        double currY = this.y;
+        double otherX = other.x;
+        double otherY = other.y;
+        double before_sqrt = Math.pow(Math.abs(currX - otherX), 2)
+                + Math.pow(Math.abs(currY - otherY), 2);
         double distance = Math.sqrt(before_sqrt);
         return distance;
     }
     /**
      * stringsToInts converts an array of strings to an array of ints.
-     * @param numbers  description
+     * @param other
      * @return int[]
      */
-    public boolean equals (Point other){
+    public boolean equals(Point other) {
         boolean ans = false;
-        if(this.x == other.x && this.y == other.y){
+        if (this.x == other.x && this.y == other.y) {
             ans = true;
         }
         return ans;
@@ -47,18 +47,18 @@ public class Point {
 
     /**
      * stringsToInts converts an array of strings to an array of ints.
-     * @param numbers  description
+     * @param
      * @return int[]
      */
-    public double getX(){
+    public double getX() {
         return this.x;
     }
     /**
      * stringsToInts converts an array of strings to an array of ints.
-     * @param numbers  description
+     * @param
      * @return int[]
      */
-    public double getY(){
+    public double getY() {
         return this.y;
     }
 
