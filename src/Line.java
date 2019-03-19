@@ -1,20 +1,30 @@
+/**
+ * Class Line describes a Line and it's functions.
+ *
+ * @version 1.2 15 Mar 2019
+ * @author Tomer Yona
+ */
 public class Line {
     private Point start;
     private Point end;
 
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param start, end  description
-     * @return int[]
+     * Constructor of line given two points.
+     * @param start start of line.
+     * @param end  end of line.
+     *
      */
     public Line(Point start, Point end) {
         this.start = start;
         this.end = end;
     }
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param x1 y1 x2 y2  description
-     * @return int[]
+     * Constructor of Line given to x and y of points.
+     * @param x1 .
+     * @param y1 .
+     * @param x2 .
+     * @param y2 .
+     *
      */
     public Line(double x1, double y1, double x2, double y2) {
         Point pointStart = new Point(x1, y1);
@@ -25,9 +35,8 @@ public class Line {
     }
 
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param
-     * @return int[]
+     * this function calculates the length of two lines.
+     * @return double
      */
     public double length() {
         return this.start.distance(this.end);
@@ -61,9 +70,11 @@ public class Line {
         return this.end;
     }
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param p q r
-     * @return int[]
+     * this function checks if the 3 points are on the same line.
+     * @param p .
+     * @param q .
+     * @param r .
+     * @return boolean
      */
 
     boolean onLine(Point p, Point q, Point r) {
@@ -76,78 +87,68 @@ public class Line {
         return false;
     }
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param p q r
+     * this is an auxilary function that calculates the direction of the line and third point.
+     * @param a .
+     * @param b .
+     * @param c .
      * @return int[]
      */
-    // To find orientation of ordered triplet (p, q, r).
-// The function returns following values
-// 0 --> p, q and r are colinear
-// 1 --> Clockwise
-// 2 --> Counterclockwise
-    int direction(Point p, Point q, Point r) {
-        // See https://www.geeksforgeeks.org/orientation-3-ordered-points/
-        // for details of below formula.
-        double val = (q.getY() - p.getY()) * (r.getX() - q.getX())
-                - (q.getX() - p.getX()) * (r.getY() - q.getY());
+    int direction(Point a, Point b, Point c) {
+        double val = (b.getY() - a.getY()) * (c.getX() - b.getX())
+                - (b.getX() - a.getX()) * (c.getY() - b.getY());
 
         if (val == 0) {
-            return 0;  // colinear
+            return 0;
         }
 
-        return (val > 0) ? 1 : 2; // clock or counterclock wise
+        return (val > 0) ? 1 : 2;
     }
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param other
-     * @return int[]
+     * this function returns true if two lines intersect and false otherwise.
+     * @param other .
+     * @return boolean
      */
-    // The main function that returns true if line segment 'p1q1'
-// and 'p2q2' intersect.
     boolean isIntersecting(Line other) {
-        Point p1 = this.start(); Point q1 = this.end(); Point p2 = other.start(); Point q2 = other.end();
-        // Find the four orientations needed for general and
-        // special cases
+        Point p1 = this.start();
+        Point q1 = this.end();
+        Point p2 = other.start();
+        Point q2 = other.end();
+
         int d1 = direction(p1, q1, p2);
         int d2 = direction(p1, q1, q2);
         int d3 = direction(p2, q2, p1);
         int d4 = direction(p2, q2, q1);
 
-        // General case
+
         if (d1 != d2 && d3 != d4) {
             return true;
         }
 
 
-        // Special Cases
-        // p1, q1 and p2 are colinear and p2 lies on segment p1q1
         if (d1 == 0 && onLine(p1, p2, q1)) {
             return true;
         }
 
-        // p1, q1 and q2 are colinear and q2 lies on segment p1q1
         if (d2 == 0 && onLine(p1, q2, q1)) {
             return true;
         }
 
-        // p2, q2 and p1 are colinear and p1 lies on segment p2q2
         if (d3 == 0 && onLine(p2, p1, q2)) {
             return true;
         }
 
-        // p2, q2 and q1 are colinear and q1 lies on segment p2q2
         if (d4 == 0 && onLine(p2, q1, q2)) {
             return true;
         }
 
-        return false; // Doesn't fall in any of the above cases
+        return false;
     }
 
 
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param other
-     * @return int[]
+     * this function returns a point of if two lines intersect.
+     * @param other .
+     * @return Point
      */
     public Point intersectionWith(Line other) {
         // Line AB represented as a1x + b1y = c1
@@ -160,21 +161,21 @@ public class Line {
         double b2 = other.start().getX() - other.end().getX();
         double c2 = a2 * (other.start().getX()) + b2 * (other.start().getY());
 
-        double determinant = (a1 * b2) - (a2 * b1);
+        double d = (a1 * b2) - (a2 * b1);
 
-        if (determinant == 0) {
-            // The lines are parallel. This is simplified
+        if (d == 0) {
+            // The lines are parallel.
             return null;
         } else {
-            double x = ((b2 * c1) - (b1 * c2)) / determinant;
-            double y = ((a1 * c2) - (a2 * c1)) / determinant;
+            double x = ((b2 * c1) - (b1 * c2)) / d;
+            double y = ((a1 * c2) - (a2 * c1)) / d;
             return new Point(x, y);
         }
     }
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param other
-     * @return int[]
+     * this function returns equal if two lines are equal and false otherwise.
+     * @param other .
+     * @return boolean
      */
     public boolean equals(Line other) {
         boolean ans = false;

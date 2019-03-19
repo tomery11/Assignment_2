@@ -1,41 +1,42 @@
 
 /**
- * Class Sort sorts n numbers in ascending and descending ways.
+ * Class Point describes a point
  *
- * @version 1.2 01 Mar 2019
+ * @version 1.2 15 Mar 2019
  * @author Tomer Yona
  */
 public class Point {
     private double x;
     private double y;
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param  x,y  description
-     * @return int[]
+     * This is a constructor of Point.
+     * @param  x .
+     * @param y .
+     *
      */
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
     /**
-     * stringsToInts converts an array of strings to an array of ints.
+     * This function returns the distance between two points.
      * @param other  description
-     * @return int[]
+     * @return double
      */
     public double distance(Point other) {
         double currX = this.x;
         double currY = this.y;
         double otherX = other.x;
         double otherY = other.y;
-        double before_sqrt = Math.pow(Math.abs(currX - otherX), 2)
+        double beforeSqrt = Math.pow(Math.abs(currX - otherX), 2)
                 + Math.pow(Math.abs(currY - otherY), 2);
-        double distance = Math.sqrt(before_sqrt);
+        double distance = Math.sqrt(beforeSqrt);
         return distance;
     }
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param other
-     * @return int[]
+     * this function checks whether two given points are equal.
+     * @param other .
+     * @return boolean
      */
     public boolean equals(Point other) {
         boolean ans = false;
@@ -46,17 +47,16 @@ public class Point {
     }
 
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param
-     * @return int[]
+     * this function returns x.
+     *
+     * @return double
      */
     public double getX() {
         return this.x;
     }
     /**
-     * stringsToInts converts an array of strings to an array of ints.
-     * @param
-     * @return int[]
+     * this function returns y.
+     * @return double
      */
     public double getY() {
         return this.y;
