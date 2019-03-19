@@ -34,12 +34,12 @@ public class Velocity {
     /**
      * set Velocity.
      *
-     * @param dx .
-     * @param dy .
+     * @param dx1 .
+     * @param dy1 .
      */
-    public void setVelocity(double dx, double dy) {
-        this.dx = dx;
-        this.dy = dy;
+    public void setVelocity(double dx1, double dy1) {
+        this.dx = dx1;
+        this.dy = dy1;
     }
 
     /**
