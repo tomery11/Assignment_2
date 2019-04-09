@@ -47,7 +47,7 @@ public class MultipleFramesBouncingBallsAnimation {
                     + frame1.getStartingPoint().getY() + arrSize1[i]);
             ballArray1[i] = new Ball(x1, y1, Integer.parseInt(args[i]),
                     Color.getHSBColor((float) (Math.random() * 255 + 1),
-                    (float) (Math.random() * 255 + 1), (float) (Math.random() * 255 + 1)), frame1);
+                    (float) (Math.random() * 255 + 1), (float) (Math.random() * 255 + 1)), frame1,new GameEnvironment());
             if (ballArray1[i].getSize() >= 50) {
                 ballArray1[i].setVelocity(1, 1);
             } else {
@@ -63,7 +63,7 @@ public class MultipleFramesBouncingBallsAnimation {
                     + frame2.getStartingPoint().getY() + arrSize2[i]);
             ballArray2[i] = new Ball(x2, y2, Integer.parseInt(args[i + args.length / 2]),
                     Color.getHSBColor((float) (Math.random() * 255 + 1),
-                    (float) (Math.random() * 255 + 1), (float) (Math.random() * 255 + 1)), frame2);
+                    (float) (Math.random() * 255 + 1), (float) (Math.random() * 255 + 1)), frame2,new GameEnvironment());
             if (ballArray2[i].getSize() >= 50) {
                 ballArray2[i].setVelocity(1, 1);
             } else {

@@ -1,6 +1,7 @@
 
 
 import biuoop.DrawSurface;
+
 import java.awt.Color;
 
 /**
@@ -9,40 +10,43 @@ import java.awt.Color;
  * @author Tomer Yona
  * @version 1.2 15 Mar 2019
  */
-public class Ball {
+public class Ball implements Sprite {
     private Point center;
     private int r;
     private java.awt.Color color;
     private Velocity velocity;
     private Frame frame;
+    private GameEnvironment gameEnvironment;
 
     /**
-     * Ball constructor.
-     *
      * @param center .
-     * @param r      .
-     * @param color  .
+     * @param r .
+     * @param color .
+     * @param gameEnvironment1 .
      */
-    public Ball(Point center, int r, java.awt.Color color) {
+    public Ball(Point center, int r, java.awt.Color color, GameEnvironment gameEnvironment1) {
         this.center = center;
         this.r = r;
         this.color = color;
         this.frame = new Frame();
+        this.gameEnvironment = gameEnvironment1;
     }
 
     /**
-     * Ball constructor.
      *
-     * @param i   .
-     * @param i1  .
-     * @param i2  .
+     * @param i .
+     * @param i1 .
+     * @param i2 .
      * @param red .
+     * @param gameEnvironment1 .
      */
-    public Ball(int i, int i1, int i2, Color red) {
+    public Ball(int i, int i1, int i2, Color red, GameEnvironment gameEnvironment1) {
         this.center = new Point(i, i1);
         this.r = i2;
         this.color = red;
         this.frame = new Frame();
+        this.gameEnvironment = gameEnvironment1;
+
     }
 
     /**
@@ -53,12 +57,35 @@ public class Ball {
      * @param i2    .
      * @param red   .
      * @param frame .
+     * @param gameEnvironment1 .
      */
-    public Ball(int i, int i1, int i2, Color red, Frame frame) {
+    public Ball(int i, int i1, int i2, Color red, Frame frame, GameEnvironment gameEnvironment1) {
         this.center = new Point(i, i1);
         this.r = i2;
         this.color = red;
         this.frame = frame;
+        this.gameEnvironment = gameEnvironment1;
+
+
+    }
+
+    /**
+     * constructor.
+     * @param i .
+     * @param i1 .
+     * @param i2 .
+     * @param red .
+     * @param frame .
+     * @param gameEnvironment1 .
+     * @param v .
+     */
+    public Ball(int i, int i1, int i2, Color red, Frame frame, GameEnvironment gameEnvironment1, Velocity v) {
+        this.center = new Point(i, i1);
+        this.r = i2;
+        this.color = red;
+        this.frame = frame;
+        this.gameEnvironment = gameEnvironment1;
+        this.velocity = v;
 
     }
 
@@ -108,6 +135,11 @@ public class Ball {
         surface.fillCircle(this.getX(), this.getY(), this.r);
     }
 
+    @Override
+    public void timePassed() {
+        moveOneStep();
+    }
+
     /**
      * sets velocity to v.
      *
@@ -140,33 +172,53 @@ public class Ball {
      * This function does the next step of the ball even if reaches a "wall".
      */
     public void moveOneStep() {
-        // next step of ball
-        double myX = this.center.getX() + velocity.getDx();
-        double myY = this.center.getY() + velocity.getDy();
 
-        // I will check all conditions that will keep the current ball in boundaries
+        // variables with values of the ball parameters.
+        double dx = this.velocity.getDx();
+        double dy = this.velocity.getDy();
+        double centerX = this.center.getX();
+        double centerY = this.center.getY();
+        // the trajectory of the ball is where it will be in the next movement
+        Point trajectoryStart = new Point(centerX, centerY);
+        Point trajectoryEnd = new Point(centerX + dx, centerY + dy);
+        Point nextCenter;
+        Line trajectory = new Line(trajectoryStart, trajectoryEnd);
 
-        // if the ball's x is outside the start point of the frame, change it's
-        // change the direction of x axis
-        if (myX - this.getSize() <= frame.getStartingPoint().getX()) {
-            setVelocity((-1) * velocity.getDx(), velocity.getDy());
-        } else if (myX + this.getSize() >= this.frame.getWidth() + frame.getStartingPoint().getX()) {
-            // if the ball's x is outside the edge of the frame, change it's
-            // change the direction of x axis
-            setVelocity((-1) * velocity.getDx(), velocity.getDy());
+        CollisionInfo currColInfo = this.gameEnvironment.getClosestCollision(trajectory);
+        // if there wont be collision in the trajectory of the ball then we will continue without changing the speed
+        if (currColInfo == null) {
+            this.center = this.velocity.applyToPoint(this.center);
+            // if there is a collision get the collisionPoint the the collidable object
+        } else {
+            Collidable colObject = this.gameEnvironment.getClosestCollision(trajectory).collisionObject();
+            Point colPoint = this.gameEnvironment.getClosestCollision(trajectory).collisionPoint();
+            //move the ball to "almost" the hit point, but just slightly before it.
+            double locationY = (Math.abs(colPoint.getY() - this.center.getY()) / 4);
+            double locationX = (Math.abs(colPoint.getX() - this.center.getX()) / 4);
+
+            if (colPoint.getY() > this.center.getY()) {
+                centerY = colPoint.getY() - locationY;
+            } else {
+                centerX = colPoint.getY() + 3 * locationY;
+            }
+            if (colPoint.getX() > this.center.getX()) {
+                centerX = colPoint.getX() - locationX;
+            } else {
+                centerX = colPoint.getX() + 3 * locationX;
+            }
+            this.center = new Point(centerX, centerY);
+            //update velocity using collidable hit function.
+            this.setVelocity(colObject.hit(colPoint, this.velocity));
+
         }
-        // if the ball's y is outside the start point of the frame, change it's
-        // change the direction of y axis
-        if (myY - this.getSize() <= frame.getStartingPoint().getY()) {
-            setVelocity(velocity.getDx(), (-1) * velocity.getDy());
-        } else if (myY + this.getSize() >= this.frame.getHeight() + frame.getStartingPoint().getX()) {
-            // if the ball's y is outside the edge of the frame, change it's
-            // change the direction of y axis
-            setVelocity(velocity.getDx(), (-1) * velocity.getDy());
-        }
-        //apply location of ball
-        this.center = this.getVelocity().applyToPoint(this.center);
     }
 
+
+    /**
+     * @param gameEnvironment1 .
+     */
+    public void setGameEnvironment(GameEnvironment gameEnvironment1) {
+        this.gameEnvironment = gameEnvironment1;
+    }
 
 }

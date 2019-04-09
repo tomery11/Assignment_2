@@ -25,7 +25,7 @@ public class MultipleBouncingBallsAnimation {
         for (int i = 0; i < args.length; i++) {
             ballArray[i] = new Ball((int) (Math.random() * 200 + 1), (int) (Math.random() * 200 + 1),
                     Integer.parseInt(args[i]), Color.getHSBColor((float) (Math.random() * 256 + 1),
-                    (float) (Math.random() * 256 + 1), (float) (Math.random() * 256 + 1)));
+                    (float) (Math.random() * 256 + 1), (float) (Math.random() * 256 + 1)),new GameEnvironment());
             ballArray[i].setVelocity(20 / ballArray[i].getSize(), 20 / ballArray[i].getSize());
         }
         GUI gui = new GUI("MultipleBouncingBallsAnimation", 200, 200);

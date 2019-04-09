@@ -1,26 +1,29 @@
 
 /**
- * Class Point describes a point
+ * Class Point describes a point.
  *
- * @version 1.2 15 Mar 2019
  * @author Tomer Yona
+ * @version 1.2 15 Mar 2019
  */
 public class Point {
     private double x;
     private double y;
+
     /**
      * This is a constructor of Point.
-     * @param  x .
-     * @param y .
      *
+     * @param x .
+     * @param y .
      */
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
+
     /**
      * This function returns the distance between two points.
-     * @param other  description
+     *
+     * @param other description
      * @return double
      */
     public double distance(Point other) {
@@ -33,8 +36,10 @@ public class Point {
         double distance = Math.sqrt(beforeSqrt);
         return distance;
     }
+
     /**
      * this function checks whether two given points are equal.
+     *
      * @param other .
      * @return boolean
      */
@@ -54,8 +59,10 @@ public class Point {
     public double getX() {
         return this.x;
     }
+
     /**
      * this function returns y.
+     *
      * @return double
      */
     public double getY() {

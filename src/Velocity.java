@@ -18,6 +18,7 @@ public class Velocity {
         this.dx = dx;
         this.dy = dy;
     }
+
     /**
      * converts computation of speed axis.
      *
@@ -43,6 +44,15 @@ public class Velocity {
     }
 
     /**
+     * set velocity.
+     * @param v .
+     */
+    public void setVelocity(Velocity v) {
+        this.dx = v.dx;
+        this.dy = v.dy;
+    }
+
+    /**
      * updates point after movement.
      *
      * @param p .
@@ -52,15 +62,19 @@ public class Velocity {
         Point toReturn = new Point(p.getX() + this.dx, p.getY() + this.dy);
         return toReturn;
     }
+
     /**
-     *getter of dx.
+     * getter of dx.
+     *
      * @return double
      */
     public double getDx() {
         return dx;
     }
+
     /**
-     *getter of dy.
+     * getter of dy.
+     *
      * @return double
      */
     public double getDy() {

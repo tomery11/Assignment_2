@@ -1,8 +1,8 @@
 /**
  * Class Line describes a Line and it's functions.
  *
- * @version 1.2 15 Mar 2019
  * @author Tomer Yona
+ * @version 1.2 15 Mar 2019
  */
 public class Line {
     private Point start;
@@ -10,21 +10,22 @@ public class Line {
 
     /**
      * Constructor of line given two points.
-     * @param start start of line.
-     * @param end  end of line.
      *
+     * @param start start of line.
+     * @param end   end of line.
      */
     public Line(Point start, Point end) {
         this.start = start;
         this.end = end;
     }
+
     /**
      * Constructor of Line given to x and y of points.
+     *
      * @param x1 .
      * @param y1 .
      * @param x2 .
      * @param y2 .
-     *
      */
     public Line(double x1, double y1, double x2, double y2) {
         Point pointStart = new Point(x1, y1);
@@ -36,13 +37,16 @@ public class Line {
 
     /**
      * this function calculates the length of two lines.
+     *
      * @return double
      */
     public double length() {
         return this.start.distance(this.end);
     }
+
     /**
      * stringsToInts converts an array of strings to an array of ints.
+     *
      * @param
      * @return int[]
      */
@@ -52,8 +56,10 @@ public class Line {
         Point middle = new Point(x, y);
         return middle;
     }
+
     /**
      * stringsToInts converts an array of strings to an array of ints.
+     *
      * @param
      * @return int[]
      */
@@ -63,14 +69,17 @@ public class Line {
 
     /**
      * stringsToInts converts an array of strings to an array of ints.
+     *
      * @param
      * @return int[]
      */
     public Point end() {
         return this.end;
     }
+
     /**
      * this function checks if the 3 points are on the same line.
+     *
      * @param p .
      * @param q .
      * @param r .
@@ -86,8 +95,35 @@ public class Line {
 
         return false;
     }
+
+    /**
+     * this function checks if a given point is located on the line.
+     * @param r .
+     * @return boolean
+     */
+    boolean onLine(Point r) {
+        // check r on X axis
+        if (!((Math.round(this.start.getX()) <= Math.round(r.getX())
+                && Math.round(r.getX()) <= Math.round(this.end.getX()))
+                || (Math.round(this.end.getX()) <= Math.round(r.getX())
+                && Math.round(r.getX()) <= Math.round(this.start.getX())))) {
+            return false;
+        }
+
+        // check r on y axis
+        if (!((Math.round(this.start.getY()) <= Math.round(r.getY())
+                && Math.round(r.getY()) <= Math.round(this.end.getY()))
+                || (Math.round(this.end.getY()) <= Math.round(r.getY())
+                && Math.round(r.getY()) <= Math.round(this.start.getY())))) {
+            return false;
+        }
+        // p is on the line
+        return true;
+    }
+
     /**
      * this is an auxilary function that calculates the direction of the line and third point.
+     *
      * @param a .
      * @param b .
      * @param c .
@@ -103,8 +139,10 @@ public class Line {
 
         return (val > 0) ? 1 : 2;
     }
+
     /**
      * this function returns true if two lines intersect and false otherwise.
+     *
      * @param other .
      * @return boolean
      */
@@ -147,6 +185,7 @@ public class Line {
 
     /**
      * this function returns a point of if two lines intersect.
+     *
      * @param other .
      * @return Point
      */
@@ -172,8 +211,10 @@ public class Line {
             return new Point(x, y);
         }
     }
+
     /**
      * this function returns equal if two lines are equal and false otherwise.
+     *
      * @param other .
      * @return boolean
      */
@@ -185,6 +226,31 @@ public class Line {
         return ans;
     }
 
-
+    /**
+     * If this line does not intersect with the rectangle, return null.
+     * Otherwise, return the closest intersection point to the start of the
+     * line.
+     *
+     * @param rect rectangle
+     * @return point that closest Intersection To Start Of Line
+     */
+    public Point closestIntersectionToStartOfLine(Rectangle rect) {
+        double distanceTempMin = Double.MAX_VALUE;
+        Line myLine = new Line(start, end);
+        java.util.List<Point> list1 = rect.intersectionPoints(myLine);
+        Point minDist = null;
+        //if point doesn't exist return null
+        if (rect.intersectionPoints(myLine) == null) {
+            return null;
+        } else {
+            for (int i = 0; i < list1.size(); i++) {
+                if (this.start.distance(list1.get(i)) < distanceTempMin) {
+                    minDist = list1.get(i);
+                    distanceTempMin = this.start.distance(list1.get(i));
+                }
+            }
+        }
+        return minDist;
+    }
 
 }
