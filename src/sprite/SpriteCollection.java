@@ -1,3 +1,5 @@
+package sprite;
+
 import biuoop.DrawSurface;
 
 import java.util.ArrayList;
@@ -35,9 +37,14 @@ public class SpriteCollection {
      * call timePassed() on all sprites.
      */
     public void notifyAllTimePassed() {
+        for (int i = 0; i < spriteList.size(); i++){
+            spriteList.get(i).timePassed();
+        }
+        /*
         for (Sprite i : spriteList) {
             i.timePassed();
         }
+        */
     }
 
 
@@ -50,5 +57,14 @@ public class SpriteCollection {
         for (Sprite i : spriteList) {
             i.drawOn(d);
         }
+    }
+
+    /**
+     * getter of list .
+     *
+     * @return List .
+     */
+    public List<Sprite> getSpriteList() {
+        return spriteList;
     }
 }

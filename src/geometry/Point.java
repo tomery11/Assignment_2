@@ -1,3 +1,4 @@
+package geometry;
 
 /**
  * Class Point describes a point.

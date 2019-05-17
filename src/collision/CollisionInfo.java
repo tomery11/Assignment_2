@@ -1,5 +1,5 @@
-
-
+package collision;
+import geometry.*;
 /**
  * A CollisionInfo class.
  * describes the info of a Collidable.

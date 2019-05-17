@@ -1,3 +1,6 @@
+
+package sprite;
+
 import biuoop.DrawSurface;
 /**
  * interface that describes a Sprite object.

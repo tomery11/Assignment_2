@@ -1,3 +1,6 @@
+package collision;
+import geometry.*;
+
 /**
  * Class Velocity describes a velocity of a ball .
  *

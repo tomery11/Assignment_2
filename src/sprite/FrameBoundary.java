@@ -1,4 +1,9 @@
+package sprite;
+import collision.Velocity;
+import game.*;
+import geometry.*;
 import biuoop.DrawSurface;
+import collision.Collidable;
 
 import java.awt.Color;
 
@@ -8,6 +13,7 @@ import java.awt.Color;
  * @author tomer yona
  */
 public class FrameBoundary implements Sprite, Collidable {
+
     private Rectangle frameRec;
 
     /**
@@ -35,7 +41,7 @@ public class FrameBoundary implements Sprite, Collidable {
      * @param Velocity .
      * @return Velocity
      */
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
         // we get the lines of the rectangle.
         Line l1 = this.frameRec.getUpperLine();
         Line l2 = this.frameRec.getLowerLine();

@@ -1,3 +1,7 @@
+package collision;
+import geometry.*;
+import sprite.Ball;
+
 /**
  * interface that describes a Collidable object.
  *
@@ -24,6 +28,6 @@ public interface Collidable {
      * @param currentVelocity .
      * @return Velocity
      */
-    Velocity hit(Point collisionPoint, Velocity currentVelocity);
+    Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity);
 
 }

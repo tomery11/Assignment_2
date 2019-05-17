@@ -1,6 +1,14 @@
+package game;
+
+
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
+import collision.Collidable;
+import sprite.*;
+import collision.*;
+import sprite.SpriteCollection;
+import geometry.*;
 
 import java.awt.Color;
 import java.util.Random;
@@ -47,23 +55,28 @@ public class Game {
     }
 
 
-
     /**
-     *Initialize a new game: create the Blocks and Ball (and Paddle).
-     *and add them to the game.
+     * Initialize a new game: create the Blocks and Ball (and Paddle).
+     * and add them to the game.
      */
     public void initialize() {
+
         this.gui = new GUI("araknoid", 1000, 600);
         //add frame blocks
         frameCreator();
         //add blocks that we will hit throughout the game
-        addGameBlocksForAss3(6, 60, 30);
-        //addGameBlocks(6, 60, 30);
-        //add balls to game
         Frame frame = new Frame(new Point(0, 0), 600, 1000);
         Velocity velocity = new Velocity(2, 2);
-        this.sprites.addSprite(new Ball(150, 350, 5, Color.WHITE, frame, this.environment, velocity));
-        this.sprites.addSprite(new Ball(300, 350, 5, Color.WHITE, frame, this.environment, velocity));
+        Ball ball1 = new Ball(150, 350, 5, Color.WHITE, frame, this.environment, velocity);
+        this.sprites.addSprite(ball1);
+        Ball ball2 = new Ball(300, 350, 5, Color.WHITE, frame, this.environment, velocity);
+        this.sprites.addSprite(ball2);
+
+        addGameBlocksForAss3(6, 60, 30,ball1);
+        //addGameBlocks(6, 60, 30);
+        //add balls to game
+
+
         //add paddle
         Rectangle sizeOfPaddle = new Rectangle(new Point(100, 545), 250, 25);
         Paddle paddle = new Paddle(sizeOfPaddle, gui);
@@ -74,13 +87,15 @@ public class Game {
 
     /**
      * in this function we add blocks as requested in the ass3.
+     *
      * @param numberOfRows .
-     * @param width .
-     * @param height .
+     * @param width        .
+     * @param height       .
      */
-    public void addGameBlocksForAss3(int numberOfRows, double width, double height) {
+    public void addGameBlocksForAss3(int numberOfRows, double width, double height, Ball ball) {
         DrawSurface d = this.gui.getDrawSurface();
         double screenWidth = d.getWidth();
+        PrintingHitListener printTest = new PrintingHitListener();
 
         Point upperLeft;
         double numberOfBlocks = 12; // number of block in each row;
@@ -93,6 +108,7 @@ public class Game {
                 Block blockToAdd = new Block(new Rectangle(blockUpperLeft, width, height), color);
                 this.sprites.addSprite(blockToAdd);
                 this.environment.addCollidable(blockToAdd);
+                printTest.hitEvent(blockToAdd,ball);
             }
         }
     }
@@ -101,8 +117,8 @@ public class Game {
      * in this function we add blocks to the surface and to the list of sprites and collidables.
      *
      * @param numOfLines .
-     * @param width .
-     * @param height .
+     * @param width      .
+     * @param height     .
      */
     public void addGameBlocks(int numOfLines, double width, double height) {
         DrawSurface drawSurface = this.gui.getDrawSurface();
@@ -128,14 +144,14 @@ public class Game {
     }
 
 
-
     /**
-     *Run the game -- start the animation loop.
+     * Run the game -- start the animation loop.
      */
     public void run() {
         int framesPerSecond = 60;
         int millisecondsPerFrame = 1000 / framesPerSecond;
         Sleeper sleeper = new Sleeper();
+
         while (true) {
             long startTime = System.currentTimeMillis(); // timing
             DrawSurface d = gui.getDrawSurface();
@@ -160,6 +176,7 @@ public class Game {
         DrawSurface drawSurface = this.gui.getDrawSurface();
         double width = drawSurface.getWidth();
         double height = drawSurface.getHeight();
+        Ball tmpBall = new Ball();
         FrameBoundary fB1 = new FrameBoundary(new Rectangle(new Point(0, 0), width, 30));
         FrameBoundary fB2 = new FrameBoundary(new Rectangle(new Point(0, 30), 30, height - 60));
         FrameBoundary fB3 = new FrameBoundary(new Rectangle(new Point(width - 30, 30), 30,
@@ -178,6 +195,7 @@ public class Game {
 
     /**
      * this function get a numbor that represents a row and returns a color.
+     *
      * @param i .
      * @return Color
      */
@@ -208,5 +226,24 @@ public class Game {
         }
         return color;
     }
+
+    /**
+     * removes a collidable object that was received.
+     *
+     * @param c .
+     */
+    public void removeCollidable(Collidable c) {
+        this.environment.getCollidablelist().remove(c);
+    }
+
+    /**
+     * removes a sprite that was received.
+     *
+     * @param s .
+     */
+    public void removeSprite(Sprite s) {
+        this.sprites.getSpriteList().remove(s);
+    }
+
 
 }

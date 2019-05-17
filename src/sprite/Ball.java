@@ -1,8 +1,16 @@
 
+package sprite;
+
 
 import biuoop.DrawSurface;
 
-import java.awt.Color;
+import game.GameEnvironment;
+import geometry.*;
+import collision.*;
+import geometry.Point;
+
+import java.awt.*;
+
 
 /**
  * Class Ball describes a ball and it's functions.
@@ -17,6 +25,13 @@ public class Ball implements Sprite {
     private Velocity velocity;
     private Frame frame;
     private GameEnvironment gameEnvironment;
+
+    /**
+     * empty constructor
+     */
+    public Ball(){
+        this.center = new Point(0,0);
+    }
 
     /**
      * @param center .
@@ -208,7 +223,7 @@ public class Ball implements Sprite {
             }
             this.center = new Point(centerX, centerY);
             //update velocity using collidable hit function.
-            this.setVelocity(colObject.hit(colPoint, this.velocity));
+            this.setVelocity(colObject.hit(this, colPoint, this.velocity));
 
         }
     }
@@ -220,5 +235,8 @@ public class Ball implements Sprite {
     public void setGameEnvironment(GameEnvironment gameEnvironment1) {
         this.gameEnvironment = gameEnvironment1;
     }
+
+
+
 
 }

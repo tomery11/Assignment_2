@@ -1,4 +1,6 @@
 
+
+import game.*;
 /**
  * runs a game as a final test for the assignment.
  *

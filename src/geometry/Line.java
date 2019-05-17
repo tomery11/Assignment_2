@@ -1,3 +1,9 @@
+
+package geometry;
+
+
+
+
 /**
  * Class Line describes a Line and it's functions.
  *
@@ -86,7 +92,7 @@ public class Line {
      * @return boolean
      */
 
-    boolean onLine(Point p, Point q, Point r) {
+    public boolean onLine(Point p, Point q, Point r) {
         if (q.getX() <= Math.max(p.getX(), r.getX()) && q.getX() >= Math.min(p.getX(), r.getX())
                 && q.getY() <= Math.max(p.getY(), r.getY()) && q.getY() >= Math.min(p.getY(), r.getY())) {
             return true;
@@ -101,7 +107,7 @@ public class Line {
      * @param r .
      * @return boolean
      */
-    boolean onLine(Point r) {
+    public boolean onLine(Point r) {
         // check r on X axis
         if (!((Math.round(this.start.getX()) <= Math.round(r.getX())
                 && Math.round(r.getX()) <= Math.round(this.end.getX()))

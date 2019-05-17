@@ -1,3 +1,8 @@
+
+package sprite;
+import geometry.*;
+
+
 /**
  * Class Frame describes a frame a ball can bounce in.
  *

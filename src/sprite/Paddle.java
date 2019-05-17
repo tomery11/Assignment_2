@@ -1,7 +1,15 @@
+
+package sprite;
+import game.Game;
+import geometry.*;
+import collision.*;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A Paddle class.
  * describes a Paddle.
@@ -19,6 +27,7 @@ public class Paddle implements Sprite, Collidable {
     private static final int REGION3 = 2;
     private static final int REGION4 = 3;
     private static final int REGION5 = 4;
+    private List<HitListener> hitListeners;
 
     /**
      * constructor.
@@ -29,6 +38,7 @@ public class Paddle implements Sprite, Collidable {
         this.rectangle = rec;
         this.color = Color.orange;
         this.gui = gui1;
+        this.hitListeners = new ArrayList<HitListener>();
     }
 
     /**
@@ -71,6 +81,74 @@ public class Paddle implements Sprite, Collidable {
         return this.rectangle;
     }
 
+    /**
+     * Notify the object that we collided with it at collisionPoint with
+     * a given velocity.
+     * The return is the new velocity expected after the hit (based on
+     * the force the object inflicted on us).
+     *
+     * @param hitter
+     * @param collisionPoint  .
+     * @param currentVelocity .
+     * @return Velocity
+     */
+    @Override
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
+        // the next line creates the top line of the paddle.
+        Line upperLine = this.rectangle.getUpperLine();
+        Line leftLine = this.rectangle.getLeftSideLine();
+        Line rightLine = this.rectangle.getRightSideLine();
+        // calling a function to calculate the collision spot one the paddle
+        int colPoint = findColisionPoint(upperLine, collisionPoint);
+        double speed = Math.sqrt(Math.pow(currentVelocity.getDx(), 2) + Math.pow(currentVelocity.getDy(), 2));
+        // for each collision region create a proper velocity as required.
+        if (upperLine.onLine(collisionPoint)) {
+            Velocity v = regionToVelocity(colPoint, speed, currentVelocity);
+            return v;
+        } else if ((leftLine.onLine(collisionPoint)) || (rightLine.onLine(collisionPoint))) {
+            return new Velocity((-1) * currentVelocity.getDx(), currentVelocity.getDy());
+        }
+        return currentVelocity;
+    }
+
+    /**
+     * Notify the object that we collided with it at collisionPoint with
+     * a given velocity.
+     * The return is the new velocity expected after the hit (based on
+     * the force the object inflicted on us).
+     *
+     * @param hitter
+     * @param collisionPoint  .
+     * @param currentVelocity .
+     * @return Velocity
+     */
+    /*
+    @Override
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
+
+        hitter.removeFromGame(this.g);
+        HitListener blr = new BallRemover(this.g);
+        this.addHitListener(blr);
+        this.shoot = true;
+        return currentVelocity;
+
+        return null;
+    }
+*/
+    /**
+     * add the list to the current list
+     * @param blr
+     */
+    public void addHitListener(HitListener blr) {
+        this.hitListeners.add(blr);
+    }
+/*
+    @Override
+    public void removeHitListener(HitListener hl) {
+        this.hitListeners.remove(hl);
+    }
+*/
+/*
     @Override
     /**
      * updates the velocity of ball when ball hits the paddle.
@@ -78,6 +156,7 @@ public class Paddle implements Sprite, Collidable {
      * @param Velocity .
      * @return Velocity
      */
+
     public Velocity hit(Point collisionPoint, Velocity currVelocity) {
         // the next line creates the top line of the paddle.
         Line upperLine = this.rectangle.getUpperLine();
@@ -95,7 +174,7 @@ public class Paddle implements Sprite, Collidable {
         }
         return currVelocity;
     }
-
+/*
     /**
      * in this function we compute where we hit(Region) the paddle.
      * @param paddleLine .
