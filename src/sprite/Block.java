@@ -1,4 +1,5 @@
 package sprite;
+
 import game.Game;
 import geometry.*;
 import collision.*;
@@ -54,12 +55,26 @@ public class Block implements Collidable, Sprite, HitNotifier {
      * constructor.
      *
      * @param rec .
-     * @param c .
+     * @param c   .
      */
     public Block(Rectangle rec, Color c) {
         this.rectangle = rec;
         this.color = c;
         hits = "2";
+        this.hitListeners = new ArrayList<HitListener>();
+        this.numOfHits = 2;
+    }
+
+    /**
+     * constructor for death region .
+     * @param rec .
+     * @param c .
+     * @param hits1 .
+     */
+    public Block(Rectangle rec, Color c, String hits1) {
+        this.rectangle = rec;
+        this.color = c;
+        this.hits = hits1;
         this.hitListeners = new ArrayList<HitListener>();
         this.numOfHits = 2;
     }
@@ -83,7 +98,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
      * @param Point .
      * @param Velocity .
      */
-    public Velocity hit(Ball hitter,Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
 
         double dx = currentVelocity.getDx();
         double dy = currentVelocity.getDy();
@@ -92,10 +107,6 @@ public class Block implements Collidable, Sprite, HitNotifier {
         setNumOfHits((this.numOfHits) - 1);
         this.notifyHit(hitter);
         setHits(this.getHits());
-        PrintingHitListener printTest = new PrintingHitListener();
-        printTest.hitEvent(this,hitter);
-        System.out.println(hitter.getX());
-        System.out.println(hitter.getY());
         if ((Math.round(cX) == Math.round(this.rectangle.getLowerLeft().getX())
                 && Math.round(cY) == Math.round(this.rectangle.getLowerLeft().getY()))
                 || (Math.round(cX) == Math.round(this.rectangle.getLowerRight().getX())
@@ -104,24 +115,18 @@ public class Block implements Collidable, Sprite, HitNotifier {
                 && Math.round(cY) == Math.round(this.rectangle.getUpperLeft().getY()))
                 || ((Math.round(cX) == Math.round(this.rectangle.getUpperRight().getX()))
                 && Math.round(cY) == Math.round(this.rectangle.getUpperRight().getY()))) {
-            System.out.println(-dx);
-            System.out.println(-dy);
+
             return new Velocity(-dx, -dy);
 
-        }else if (this.rectangle.getUpperLine().onLine(collisionPoint)
+        } else if (this.rectangle.getUpperLine().onLine(collisionPoint)
                 || this.rectangle.getLowerLine().onLine(collisionPoint)) {
-            System.out.println(dx);
-            System.out.println(-dy);
+
             return new Velocity(dx, -dy);
             //if ball collides with corners of block
         } else if (this.rectangle.getLeftSideLine().onLine(collisionPoint)
                 || this.rectangle.getRightSideLine().onLine(collisionPoint)) {
-            System.out.println(-dx);
-            System.out.println(dy);
             return new Velocity(-dx, dy);
         } else {
-            System.out.println(dx);
-            System.out.println(dy);
             return new Velocity(dx, dy);
         }
 
@@ -142,10 +147,10 @@ public class Block implements Collidable, Sprite, HitNotifier {
     }
 
 
-
-    public void setNumOfHits(int num){
+    public void setNumOfHits(int num) {
         this.numOfHits = num;
     }
+
     /**
      * Draws the block, frame and number of hits of the block/rectangle.
      *
@@ -194,9 +199,10 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     /**
      * removes the block from a certain game.
+     *
      * @param game .
      */
-    public void removeFromGame(Game game){
+    public void removeFromGame(Game game) {
         game.removeSprite(this);
         game.removeCollidable(this);
     }
@@ -209,23 +215,20 @@ public class Block implements Collidable, Sprite, HitNotifier {
     @Override
     public void removeHitListener(HitListener hl) {
         this.hitListeners.remove(hl);
+
     }
 
     private void notifyHit(Ball hitter) {
         // Make a copy of the hitListeners before iterating over them.
         List<HitListener> listeners = new ArrayList<HitListener>(this.hitListeners);
         // Notify all listeners about a hit event:
-        for (int i = 0; i < listeners.size(); i++){
+        for (int i = 0; i < listeners.size(); i++) {
             listeners.get(i).hitEvent(this, hitter);
         }
-        /*
-        for (HitListener hl : listeners) {
-            hl.hitEvent(this, hitter);
-        }
-        */
+
     }
 
-    public int getNumOfHits(){
+    public int getNumOfHits() {
         return this.numOfHits;
     }
 }

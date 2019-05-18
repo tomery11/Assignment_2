@@ -21,14 +21,15 @@ public class Counter {
      * add number to current count.
      * @param number .
      */
-    void increase(int number) {
+    public void increase(int number) {
         this.count = this.count + number;
     }
 
     /**
      * subtract number to current count.
      * @param number .
-     */    void decrease(int number) {
+     */
+    public void decrease(int number) {
         this.count = this.count - number;
     }
 
@@ -37,7 +38,7 @@ public class Counter {
      *  return the value of the current count.
      * @return int .
      */
-    int getValue() {
+    public int getValue() {
         return this.count;
     }
 }

@@ -4,6 +4,7 @@ package sprite;
 
 import biuoop.DrawSurface;
 
+import game.Game;
 import game.GameEnvironment;
 import geometry.*;
 import collision.*;
@@ -237,6 +238,15 @@ public class Ball implements Sprite {
     }
 
 
+
+    public void addToGame(Game myGame) {
+        myGame.addSprite(this);
+    }
+
+
+    public void removeFromGame(Game myGame) {
+        myGame.removeSprite(this);
+    }
 
 
 }

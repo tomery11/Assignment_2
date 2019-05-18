@@ -4,6 +4,7 @@ import counter.*;
 import game.Game;
 import sprite.Ball;
 import sprite.Block;
+import sprite.FrameBoundary;
 
 /**
  * a BlockRemover is in charge of removing blocks from the game, as well as keeping count
@@ -17,9 +18,22 @@ public class BlockRemover implements HitListener {
     private Counter remainingBlocks;
 
 
-    // not sure about the remainingBlocks field here.
-    public BlockRemover(Game game, Counter removedBlocks) {
-        this.game = game;
+    /**
+     * BlockRemover Constructor.
+     * @param currGame .
+     */
+    public BlockRemover(Game currGame){
+        this.game = currGame;
+    }
+
+
+    /**
+     * BlockRemover constructor.
+     * @param currGame .
+     * @param removedBlocks .
+     */
+    public BlockRemover(Game currGame, Counter removedBlocks) {
+        this.game = currGame;
         this.remainingBlocks = removedBlocks;
     }
 
@@ -34,6 +48,13 @@ public class BlockRemover implements HitListener {
         if (beingHit.getNumOfHits() == 0){
             beingHit.removeHitListener(this);
             beingHit.removeFromGame(game);
+            this.remainingBlocks.decrease(1);
         }
+    }
+
+
+
+    public Counter getRemainingBlocks() {
+        return remainingBlocks;
     }
 }

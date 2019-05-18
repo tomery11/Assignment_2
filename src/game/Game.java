@@ -5,6 +5,8 @@ import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
 import collision.Collidable;
+import counter.Counter;
+import counter.ScoreTrackingListener;
 import sprite.*;
 import collision.*;
 import sprite.SpriteCollection;
@@ -25,6 +27,9 @@ public class Game {
     private SpriteCollection sprites;
     private GameEnvironment environment;
     private GUI gui;
+    private Counter blockCounter;
+    private Counter ballCounter;
+    private ScoreIndicator scoreBoard;
 
 
     /**
@@ -33,6 +38,10 @@ public class Game {
     public Game() {
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
+        this.blockCounter = new Counter(0);
+        this.ballCounter = new Counter(0);
+        this.scoreBoard = new ScoreIndicator(new Rectangle(new Point(0, 0), 800, 20),
+                false);
 
     }
 
@@ -60,25 +69,32 @@ public class Game {
      * and add them to the game.
      */
     public void initialize() {
-
-        this.gui = new GUI("araknoid", 1000, 600);
+        BallRemover ballRemover = new BallRemover(this, this.ballCounter);
+        this.gui = new GUI("araknoid", 800, 600);
         //add frame blocks
         frameCreator();
+        //add score board to gui
+        //scoreBoardCreator();
         //add blocks that we will hit throughout the game
-        Frame frame = new Frame(new Point(0, 0), 600, 1000);
+        Frame frame = new Frame(new Point(0, 0), 600, 800);
         Velocity velocity = new Velocity(2, 2);
         Ball ball1 = new Ball(150, 350, 5, Color.WHITE, frame, this.environment, velocity);
         this.sprites.addSprite(ball1);
         Ball ball2 = new Ball(300, 350, 5, Color.WHITE, frame, this.environment, velocity);
         this.sprites.addSprite(ball2);
+        Ball ball3 = new Ball(175, 350, 5, Color.WHITE, frame, this.environment, velocity);
+        this.sprites.addSprite(ball3);
+        //ball1.addHitListener(ballRemover);
+        //this.ballCounter.increase(3);
 
-        addGameBlocksForAss3(6, 60, 30,ball1);
-        //addGameBlocks(6, 60, 30);
+        //addGameBlocksForAss3(6, 60, 30, ball1);
+
+        addGameBlocks(6, 60, 30, this.scoreBoard);
         //add balls to game
 
 
         //add paddle
-        Rectangle sizeOfPaddle = new Rectangle(new Point(100, 545), 250, 25);
+        Rectangle sizeOfPaddle = new Rectangle(new Point(300, 545), 200, 20);
         Paddle paddle = new Paddle(sizeOfPaddle, gui);
         paddle.addToGame(this);
 
@@ -95,7 +111,11 @@ public class Game {
     public void addGameBlocksForAss3(int numberOfRows, double width, double height, Ball ball) {
         DrawSurface d = this.gui.getDrawSurface();
         double screenWidth = d.getWidth();
+        BlockRemover removeBlocks = new BlockRemover(this, this.blockCounter);
         PrintingHitListener printTest = new PrintingHitListener();
+
+        //update height for creating scoreboard for gui
+        height = height - 590;
 
         Point upperLeft;
         double numberOfBlocks = 12; // number of block in each row;
@@ -108,7 +128,9 @@ public class Game {
                 Block blockToAdd = new Block(new Rectangle(blockUpperLeft, width, height), color);
                 this.sprites.addSprite(blockToAdd);
                 this.environment.addCollidable(blockToAdd);
-                printTest.hitEvent(blockToAdd,ball);
+                //add block to listener
+                blockToAdd.addHitListener(removeBlocks);
+                this.blockCounter.increase(1);
             }
         }
     }
@@ -120,23 +142,33 @@ public class Game {
      * @param width      .
      * @param height     .
      */
-    public void addGameBlocks(int numOfLines, double width, double height) {
+    public void addGameBlocks(int numOfLines, double width, double height, ScoreIndicator scoreBoard) {
         DrawSurface drawSurface = this.gui.getDrawSurface();
         double widthOfScreen = drawSurface.getWidth() - 110;
         double numOfBlocks = widthOfScreen / width;
-        Random random = new Random();
+        //Random random = new Random();
         Point upperLeft;
+        BlockRemover removeBlocks = new BlockRemover(this, this.blockCounter);
+        //score board
+
+        this.sprites.addSprite(scoreBoard);
+        ScoreTrackingListener scoreTracker = new ScoreTrackingListener(scoreBoard.getScoreCounter());
+
 
         for (int i = 0; i < numOfLines; i++) {
             Color c = getColorOfRow(i);
             upperLeft = new Point(30, height * i + 150);
             // this loop is creating the block for each row
             for (int j = 0; j < numOfBlocks; j++) {
-                Point blockUpperLeft = new Point(widthOfScreen - j * width, upperLeft.getY());
+                Point blockUpperLeft = new Point((widthOfScreen - j * width) + 10, upperLeft.getY());
                 //maybe in the future will add here num of hits.
                 Block tempBlock = new Block(new Rectangle(blockUpperLeft, width, height), c);
                 this.sprites.addSprite(tempBlock);
                 this.environment.addCollidable(tempBlock);
+                //add block to listener
+                tempBlock.addHitListener(removeBlocks);
+                this.blockCounter.increase(1);
+                tempBlock.addHitListener(scoreTracker);
             }
 
         }
@@ -156,7 +188,7 @@ public class Game {
             long startTime = System.currentTimeMillis(); // timing
             DrawSurface d = gui.getDrawSurface();
             d.setColor(new Color(0, 0, 153));
-            d.fillRectangle(0, 0, 1000, 600);
+            d.fillRectangle(0, 0, 800, 600);
             this.sprites.drawAllOn(d);
             gui.show(d);
             this.sprites.notifyAllTimePassed();
@@ -166,35 +198,62 @@ public class Game {
             if (milliSecondLeftToSleep > 0) {
                 sleeper.sleepFor(milliSecondLeftToSleep);
             }
+            if (this.blockCounter.getValue() == 0) {
+                this.scoreBoard.getScoreCounter().increase(100);
+                break;
+            }
+            if (this.ballCounter.getValue() == 0) {
+                break;
+            }
+
         }
+        gui.close();
     }
 
     /**
      * creation of a frame,basically is is 4 blocks around the frame of the surface.
      */
     public void frameCreator() {
+
+
         DrawSurface drawSurface = this.gui.getDrawSurface();
         double width = drawSurface.getWidth();
+
         double height = drawSurface.getHeight();
-        Ball tmpBall = new Ball();
-        FrameBoundary fB1 = new FrameBoundary(new Rectangle(new Point(0, 0), width, 30));
-        FrameBoundary fB2 = new FrameBoundary(new Rectangle(new Point(0, 30), 30, height - 60));
-        FrameBoundary fB3 = new FrameBoundary(new Rectangle(new Point(width - 30, 30), 30,
-                height - 60));
-        FrameBoundary fB4 = new FrameBoundary(new Rectangle(new Point(0, height - 30), width, 30));
-        this.sprites.addSprite(fB1);
-        this.environment.addCollidable(fB1);
+        //Ball tmpBall = new Ball();
+        //upper frame
+        FrameBoundary fB1 = new FrameBoundary(new Rectangle(new Point(0, 20), width, 30),
+                false);
+        //left frame
+        FrameBoundary fB2 = new FrameBoundary(new Rectangle(new Point(0, 50), 30, height - 60),
+                false);
+        //right frame
+        FrameBoundary fB3 = new FrameBoundary(new Rectangle(new Point(width - 30, 50), 30,
+                height - 60), false);
+
+        DeathRegion currDeathRegion = new DeathRegion(new Rectangle(new Point(0, height), width, 30),
+                new Color(0, 0, 153), "X");
+        this.sprites.addSprite(currDeathRegion);
+        this.environment.addCollidable(currDeathRegion);
+
+        //hitlistener for removeing balls
+        this.ballCounter.increase(3);
+        BallRemover removeBalls = new BallRemover(this, this.ballCounter);
+        currDeathRegion.addHitListener(removeBalls);
+
+
+        //add the frames to sprite lists
         this.sprites.addSprite(fB2);
         this.environment.addCollidable(fB2);
         this.sprites.addSprite(fB3);
         this.environment.addCollidable(fB3);
-        this.sprites.addSprite(fB4);
-        this.environment.addCollidable(fB4);
+        this.sprites.addSprite(fB1);
+        this.environment.addCollidable(fB1);
 
     }
 
     /**
-     * this function get a numbor that represents a row and returns a color.
+     * this function get a number that represents a row and returns a color.
      *
      * @param i .
      * @return Color
