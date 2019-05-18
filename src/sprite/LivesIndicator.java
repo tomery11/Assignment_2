@@ -9,31 +9,34 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * a sprite that represents a score indicator bar .
+ * a sprite that represents a life indicator bar .
  * @author Tomer Yona
  * @version 1.2 4 Apr 2019
  */
-public class ScoreIndicator implements Sprite {
-    private Counter scoreCounter;
+public class LivesIndicator implements Sprite{
+    private Counter livesCounter;
     private Rectangle rec;
     private List<HitListener> hitListeners;
 
     /**
-     * constructor.
-     *
+     * Constructor of Life indicator.
      * @param frameRectangle .
+     * @param k .
      */
-    public ScoreIndicator(Rectangle frameRectangle) {
+    public LivesIndicator(Rectangle frameRectangle, int k) {
         this.rec = frameRectangle;
-        this.scoreCounter = new Counter(0);
-        this.hitListeners = new ArrayList<HitListener>();
+        this.livesCounter = new Counter(k);
+        //this.hitListeners = new ArrayList<HitListener>();
 
     }
 
+
     /**
-     * draws the sprite on the surface.
+     * draw the sprite to the screen.
+     *
      * @param d .
      */
+    @Override
     public void drawOn(DrawSurface d) {
         // draw a frame in color white.
 
@@ -52,7 +55,7 @@ public class ScoreIndicator implements Sprite {
                         + (int) (0.5 * getRec().getWidth()) - 20,
                 (int) getRec().getUpperLeft().getY() +
                         (int) (0.5 * getRec().getHeight()) + 5,
-                "Score: " + this.scoreCounter.getValue(), 12);
+                "Lives: " + this.livesCounter.getValue(), 12);
 
 
     }
@@ -66,19 +69,18 @@ public class ScoreIndicator implements Sprite {
     }
 
     /**
-     * getter for Rectangle.
+     * getter for rectangle.
      * @return Rectangle .
      */
     public Rectangle getRec() {
         return rec;
     }
 
-
     /**
-     * getter for Score counter.
+     * getter of counter.
      * @return Counter.
      */
-    public Counter getScoreCounter() {
-        return scoreCounter;
+    public Counter getLivesCounter() {
+        return livesCounter;
     }
 }

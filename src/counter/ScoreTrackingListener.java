@@ -3,7 +3,11 @@ package counter;
 import collision.HitListener;
 import sprite.Ball;
 import sprite.Block;
-
+/**
+ * a class that describes a counter.
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class ScoreTrackingListener implements HitListener {
         private Counter currentScore;
 

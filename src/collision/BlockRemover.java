@@ -54,7 +54,5 @@ public class BlockRemover implements HitListener {
 
 
 
-    public Counter getRemainingBlocks() {
-        return remainingBlocks;
-    }
+
 }

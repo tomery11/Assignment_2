@@ -29,19 +29,24 @@ public class Game {
     private GUI gui;
     private Counter blockCounter;
     private Counter ballCounter;
+    private Counter lifeCounter;
     private ScoreIndicator scoreBoard;
-
+    private LivesIndicator livesBoard;
 
     /**
      * Constructor of Game.
+     *
      */
     public Game() {
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
         this.blockCounter = new Counter(0);
         this.ballCounter = new Counter(0);
-        this.scoreBoard = new ScoreIndicator(new Rectangle(new Point(0, 0), 800, 20),
-                false);
+        this.lifeCounter = new Counter(4);
+        this.scoreBoard = new ScoreIndicator(new Rectangle(new Point(0, 0), 800, 20));
+        this.livesBoard = new LivesIndicator(new Rectangle(new Point(0, 20), 800, 20),
+                lifeCounter.getValue());
+
 
     }
 
@@ -76,14 +81,8 @@ public class Game {
         //add score board to gui
         //scoreBoardCreator();
         //add blocks that we will hit throughout the game
-        Frame frame = new Frame(new Point(0, 0), 600, 800);
-        Velocity velocity = new Velocity(2, 2);
-        Ball ball1 = new Ball(150, 350, 5, Color.WHITE, frame, this.environment, velocity);
-        this.sprites.addSprite(ball1);
-        Ball ball2 = new Ball(300, 350, 5, Color.WHITE, frame, this.environment, velocity);
-        this.sprites.addSprite(ball2);
-        Ball ball3 = new Ball(175, 350, 5, Color.WHITE, frame, this.environment, velocity);
-        this.sprites.addSprite(ball3);
+
+
         //ball1.addHitListener(ballRemover);
         //this.ballCounter.increase(3);
 
@@ -149,10 +148,13 @@ public class Game {
         //Random random = new Random();
         Point upperLeft;
         BlockRemover removeBlocks = new BlockRemover(this, this.blockCounter);
-        //score board
 
+        //score board
         this.sprites.addSprite(scoreBoard);
         ScoreTrackingListener scoreTracker = new ScoreTrackingListener(scoreBoard.getScoreCounter());
+
+        //lives board
+        this.sprites.addSprite(livesBoard);
 
 
         for (int i = 0; i < numOfLines; i++) {
@@ -175,16 +177,34 @@ public class Game {
 
     }
 
+    /**
+     * this function runs the game according to ass5
+     */
+    public void run(){
+       while (this.livesBoard.getLivesCounter().getValue() > 0) {
+           playOneTurn();
+       }
+       gui.close();
+       return;
+    }
 
     /**
-     * Run the game -- start the animation loop.
+     * this function plays one turn
      */
-    public void run() {
+    public void playOneTurn() {
         int framesPerSecond = 60;
         int millisecondsPerFrame = 1000 / framesPerSecond;
         Sleeper sleeper = new Sleeper();
+        //creating balls
+        Frame frame = new Frame(new Point(0, 0), 600, 800);
+        Velocity velocity = new Velocity(2, 2);
+        Ball ball1 = new Ball(150, 350, 5, Color.WHITE, frame, this.environment, velocity);
+        this.sprites.addSprite(ball1);
+        Ball ball2 = new Ball(300, 350, 5, Color.WHITE, frame, this.environment, velocity);
+        this.sprites.addSprite(ball2);
+        this.ballCounter.increase(2);
 
-        while (true) {
+        while (this.ballCounter.getValue() > 0) {
             long startTime = System.currentTimeMillis(); // timing
             DrawSurface d = gui.getDrawSurface();
             d.setColor(new Color(0, 0, 153));
@@ -200,14 +220,16 @@ public class Game {
             }
             if (this.blockCounter.getValue() == 0) {
                 this.scoreBoard.getScoreCounter().increase(100);
-                break;
+                gui.close();
+                return;
             }
             if (this.ballCounter.getValue() == 0) {
+                this.livesBoard.getLivesCounter().decrease(1);
                 break;
             }
 
         }
-        gui.close();
+        //gui.close();
     }
 
     /**
@@ -222,13 +244,13 @@ public class Game {
         double height = drawSurface.getHeight();
         //Ball tmpBall = new Ball();
         //upper frame
-        FrameBoundary fB1 = new FrameBoundary(new Rectangle(new Point(0, 20), width, 30),
+        FrameBoundary fB1 = new FrameBoundary(new Rectangle(new Point(0, 40), width, 30),
                 false);
         //left frame
-        FrameBoundary fB2 = new FrameBoundary(new Rectangle(new Point(0, 50), 30, height - 60),
+        FrameBoundary fB2 = new FrameBoundary(new Rectangle(new Point(0, 70), 30, height - 60),
                 false);
         //right frame
-        FrameBoundary fB3 = new FrameBoundary(new Rectangle(new Point(width - 30, 50), 30,
+        FrameBoundary fB3 = new FrameBoundary(new Rectangle(new Point(width - 30, 70), 30,
                 height - 60), false);
 
         DeathRegion currDeathRegion = new DeathRegion(new Rectangle(new Point(0, height), width, 30),
@@ -237,9 +259,14 @@ public class Game {
         this.environment.addCollidable(currDeathRegion);
 
         //hitlistener for removeing balls
-        this.ballCounter.increase(3);
+
         BallRemover removeBalls = new BallRemover(this, this.ballCounter);
         currDeathRegion.addHitListener(removeBalls);
+
+
+        //hitlistener for liveRemover
+        //LifeRemover removeLife = new LifeRemover(this, this.lifeCounter);
+        //currDeathRegion.addHitListener(removeLife);
 
 
         //add the frames to sprite lists
@@ -303,6 +330,9 @@ public class Game {
     public void removeSprite(Sprite s) {
         this.sprites.getSpriteList().remove(s);
     }
+
+
+
 
 
 }
