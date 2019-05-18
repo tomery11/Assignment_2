@@ -5,23 +5,25 @@ import collision.HitListener;
 import counter.Counter;
 import geometry.Rectangle;
 
-import java.awt.*;
-import java.util.ArrayList;
+import java.awt.Color;
 import java.util.List;
+
 /**
  * a sprite that represents a life indicator bar .
+ *
  * @author Tomer Yona
  * @version 1.2 4 Apr 2019
  */
-public class LivesIndicator implements Sprite{
+public class LivesIndicator implements Sprite {
     private Counter livesCounter;
     private Rectangle rec;
     private List<HitListener> hitListeners;
 
     /**
      * Constructor of Life indicator.
+     *
      * @param frameRectangle .
-     * @param k .
+     * @param k              .
      */
     public LivesIndicator(Rectangle frameRectangle, int k) {
         this.rec = frameRectangle;
@@ -53,8 +55,8 @@ public class LivesIndicator implements Sprite{
         //placement of text in correct location
         d.drawText((int) getRec().getUpperLeft().getX()
                         + (int) (0.5 * getRec().getWidth()) - 20,
-                (int) getRec().getUpperLeft().getY() +
-                        (int) (0.5 * getRec().getHeight()) + 5,
+                (int) getRec().getUpperLeft().getY()
+                        + (int) (0.5 * getRec().getHeight()) + 5,
                 "Lives: " + this.livesCounter.getValue(), 12);
 
 
@@ -70,6 +72,7 @@ public class LivesIndicator implements Sprite{
 
     /**
      * getter for rectangle.
+     *
      * @return Rectangle .
      */
     public Rectangle getRec() {
@@ -78,6 +81,7 @@ public class LivesIndicator implements Sprite{
 
     /**
      * getter of counter.
+     *
      * @return Counter.
      */
     public Counter getLivesCounter() {

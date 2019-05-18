@@ -1,11 +1,16 @@
 package sprite;
 
-import collision.HitNotifier;
+
 import geometry.Point;
 import geometry.Rectangle;
 
-import java.awt.*;
-
+import java.awt.Color;
+/**
+ * Class DeathReigon describes where ball hits it disapears.
+ *
+ * @author Tomer Yona
+ * @version 1.2 3 Apr 2019
+ */
 public class DeathRegion extends Block {
     /**
      * constructor.
@@ -34,11 +39,18 @@ public class DeathRegion extends Block {
      * @param c   .
      */
     public DeathRegion(Rectangle rec, Color c) {
-        super(rec,  c);
+        super(rec, c);
 
     }
+
+    /**
+     * constructor.
+     * @param rec .
+     * @param c .
+     * @param hits .
+     */
     public DeathRegion(Rectangle rec, Color c, String hits) {
-        super(rec,  c, hits);
+        super(rec, c, hits);
 
     }
 }

@@ -1,14 +1,15 @@
 package collision;
 
-import counter.*;
+import counter.Counter;
 import game.Game;
 import sprite.Ball;
 import sprite.Block;
-import sprite.FrameBoundary;
+
 
 /**
  * a BlockRemover is in charge of removing blocks from the game, as well as keeping count
  * of the number of blocks that remain.
+ *
  * @author Tomer Yona
  * @version 1.2 4 Apr 2019
  */
@@ -20,16 +21,18 @@ public class BlockRemover implements HitListener {
 
     /**
      * BlockRemover Constructor.
+     *
      * @param currGame .
      */
-    public BlockRemover(Game currGame){
+    public BlockRemover(Game currGame) {
         this.game = currGame;
     }
 
 
     /**
      * BlockRemover constructor.
-     * @param currGame .
+     *
+     * @param currGame      .
      * @param removedBlocks .
      */
     public BlockRemover(Game currGame, Counter removedBlocks) {
@@ -45,14 +48,12 @@ public class BlockRemover implements HitListener {
      * that is being removed from the game.
      */
     public void hitEvent(Block beingHit, Ball hitter) {
-        if (beingHit.getNumOfHits() == 0){
+        if (beingHit.getNumOfHits() == 0) {
             beingHit.removeHitListener(this);
             beingHit.removeFromGame(game);
             this.remainingBlocks.decrease(1);
         }
     }
-
-
 
 
 }

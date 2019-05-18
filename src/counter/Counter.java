@@ -1,4 +1,5 @@
 package counter;
+
 /**
  * Class that describes a counter.
  *
@@ -11,6 +12,7 @@ public class Counter {
     /**
      * constructor of counter, inits the counter to 0.
      * not sure if should be set to zero in constructor.
+     *  @param currentCount .
      */
     public Counter(int currentCount) {
         this.count = currentCount;
@@ -19,6 +21,7 @@ public class Counter {
 
     /**
      * add number to current count.
+     *
      * @param number .
      */
     public void increase(int number) {
@@ -27,6 +30,7 @@ public class Counter {
 
     /**
      * subtract number to current count.
+     *
      * @param number .
      */
     public void decrease(int number) {
@@ -35,7 +39,8 @@ public class Counter {
 
 
     /**
-     *  return the value of the current count.
+     * return the value of the current count.
+     *
      * @return int .
      */
     public int getValue() {

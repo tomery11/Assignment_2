@@ -6,11 +6,14 @@ import biuoop.DrawSurface;
 
 import game.Game;
 import game.GameEnvironment;
-import geometry.*;
-import collision.*;
 import geometry.Point;
+import geometry.Line;
+import collision.Velocity;
+import collision.Collidable;
+import collision.CollisionInfo;
 
-import java.awt.*;
+
+import java.awt.Color;
 
 
 /**
@@ -28,10 +31,10 @@ public class Ball implements Sprite {
     private GameEnvironment gameEnvironment;
 
     /**
-     * empty constructor
+     * empty constructor.
      */
-    public Ball(){
-        this.center = new Point(0,0);
+    public Ball() {
+        this.center = new Point(0, 0);
     }
 
     /**
@@ -238,12 +241,18 @@ public class Ball implements Sprite {
     }
 
 
-
+    /**
+     * add the ball to a game.
+     * @param myGame .
+     */
     public void addToGame(Game myGame) {
         myGame.addSprite(this);
     }
 
-
+    /**
+     * removes the ball from the game.
+     * @param myGame .
+     */
     public void removeFromGame(Game myGame) {
         myGame.removeSprite(this);
     }

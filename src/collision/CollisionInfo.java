@@ -1,5 +1,7 @@
 package collision;
-import geometry.*;
+
+import geometry.Point;
+
 /**
  * A CollisionInfo class.
  * describes the info of a Collidable.
@@ -23,6 +25,7 @@ public class CollisionInfo {
 
     /**
      * the point at which the collision occurs.
+     *
      * @return Point
      */
     public Point collisionPoint() {
@@ -31,6 +34,7 @@ public class CollisionInfo {
 
     /**
      * the collidable object involved in the collision.
+     *
      * @return Collidable
      */
     public Collidable collisionObject() {

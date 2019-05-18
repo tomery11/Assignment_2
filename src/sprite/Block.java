@@ -1,8 +1,12 @@
 package sprite;
 
 import game.Game;
-import geometry.*;
-import collision.*;
+import geometry.Point;
+import geometry.Rectangle;
+import collision.Collidable;
+import collision.Velocity;
+import collision.HitListener;
+import collision.HitNotifier;
 import biuoop.DrawSurface;
 
 import java.awt.Color;
@@ -67,8 +71,9 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     /**
      * constructor for death region .
-     * @param rec .
-     * @param c .
+     *
+     * @param rec   .
+     * @param c     .
      * @param hits1 .
      */
     public Block(Rectangle rec, Color c, String hits1) {
@@ -146,7 +151,10 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     }
 
-
+    /**
+     * setter.
+     * @param num .
+     */
     public void setNumOfHits(int num) {
         this.numOfHits = num;
     }
@@ -218,6 +226,11 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     }
 
+    /**
+     * hit notifier.
+     *
+     * @param hitter .
+     */
     private void notifyHit(Ball hitter) {
         // Make a copy of the hitListeners before iterating over them.
         List<HitListener> listeners = new ArrayList<HitListener>(this.hitListeners);
@@ -228,6 +241,11 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     }
 
+    /**
+     * getter.
+     *
+     * @return int .
+     */
     public int getNumOfHits() {
         return this.numOfHits;
     }

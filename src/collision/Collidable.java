@@ -1,5 +1,6 @@
 package collision;
-import geometry.*;
+import geometry.Point;
+import geometry.Rectangle;
 import sprite.Ball;
 
 /**
@@ -23,7 +24,7 @@ public interface Collidable {
      * a given velocity.
      * The return is the new velocity expected after the hit (based on
      * the force the object inflicted on us).
-     *
+     * @param hitter .
      * @param collisionPoint .
      * @param currentVelocity .
      * @return Velocity

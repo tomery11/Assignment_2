@@ -7,10 +7,23 @@ import biuoop.Sleeper;
 import collision.Collidable;
 import counter.Counter;
 import counter.ScoreTrackingListener;
-import sprite.*;
-import collision.*;
+import sprite.LivesIndicator;
+import sprite.Paddle;
+import sprite.ScoreIndicator;
+import sprite.Block;
 import sprite.SpriteCollection;
-import geometry.*;
+import sprite.Sprite;
+import sprite.Frame;
+import sprite.Ball;
+import sprite.FrameBoundary;
+import sprite.DeathRegion;
+
+import collision.BallRemover;
+import collision.BlockRemover;
+import collision.Velocity;
+import collision.PrintingHitListener;
+import geometry.Point;
+import geometry.Rectangle;
 
 import java.awt.Color;
 import java.util.Random;
@@ -35,7 +48,6 @@ public class Game {
 
     /**
      * Constructor of Game.
-     *
      */
     public Game() {
         this.sprites = new SpriteCollection();
@@ -88,7 +100,7 @@ public class Game {
 
         //addGameBlocksForAss3(6, 60, 30, ball1);
 
-        addGameBlocks(6, 60, 30, this.scoreBoard);
+        addGameBlocks(6, 60, 30);
         //add balls to game
 
 
@@ -106,6 +118,7 @@ public class Game {
      * @param numberOfRows .
      * @param width        .
      * @param height       .
+     * @param ball .
      */
     public void addGameBlocksForAss3(int numberOfRows, double width, double height, Ball ball) {
         DrawSurface d = this.gui.getDrawSurface();
@@ -140,8 +153,9 @@ public class Game {
      * @param numOfLines .
      * @param width      .
      * @param height     .
+     *
      */
-    public void addGameBlocks(int numOfLines, double width, double height, ScoreIndicator scoreBoard) {
+    public void addGameBlocks(int numOfLines, double width, double height) {
         DrawSurface drawSurface = this.gui.getDrawSurface();
         double widthOfScreen = drawSurface.getWidth() - 110;
         double numOfBlocks = widthOfScreen / width;
@@ -178,18 +192,18 @@ public class Game {
     }
 
     /**
-     * this function runs the game according to ass5
+     * this function runs the game according to ass5.
      */
-    public void run(){
-       while (this.livesBoard.getLivesCounter().getValue() > 0) {
-           playOneTurn();
-       }
-       gui.close();
-       return;
+    public void run() {
+        while (this.livesBoard.getLivesCounter().getValue() > 0) {
+            playOneTurn();
+        }
+        gui.close();
+        return;
     }
 
     /**
-     * this function plays one turn
+     * this function plays one turn.
      */
     public void playOneTurn() {
         int framesPerSecond = 60;
@@ -330,9 +344,6 @@ public class Game {
     public void removeSprite(Sprite s) {
         this.sprites.getSpriteList().remove(s);
     }
-
-
-
 
 
 }

@@ -1,5 +1,5 @@
 package collision;
-import geometry.*;
+import geometry.Point;
 
 /**
  * Class Velocity describes a velocity of a ball .

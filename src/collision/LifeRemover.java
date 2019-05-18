@@ -4,9 +4,11 @@ import counter.Counter;
 import game.Game;
 import sprite.Ball;
 import sprite.Block;
+
 /**
  * a LifeRemover is in charge of removing lives from the game, as well as keeping count
  * of the number of lives that remain.
+ *
  * @author Tomer Yona
  * @version 1.2 4 Apr 2019
  */
@@ -16,6 +18,7 @@ public class LifeRemover implements HitListener {
 
     /**
      * LifeRemover Constructor.
+     *
      * @param myGame .
      */
     public LifeRemover(Game myGame) {
@@ -25,7 +28,8 @@ public class LifeRemover implements HitListener {
 
     /**
      * LifeRemover Constructor.
-     * @param myGame .
+     *
+     * @param myGame        .
      * @param lifeRemaining .
      */
     public LifeRemover(Game myGame, Counter lifeRemaining) {

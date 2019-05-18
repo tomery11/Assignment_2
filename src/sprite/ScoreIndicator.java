@@ -5,11 +5,13 @@ import collision.HitListener;
 import counter.Counter;
 import geometry.Rectangle;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * a sprite that represents a score indicator bar .
+ *
  * @author Tomer Yona
  * @version 1.2 4 Apr 2019
  */
@@ -32,6 +34,7 @@ public class ScoreIndicator implements Sprite {
 
     /**
      * draws the sprite on the surface.
+     *
      * @param d .
      */
     public void drawOn(DrawSurface d) {
@@ -50,8 +53,8 @@ public class ScoreIndicator implements Sprite {
         //placement of text in correct location
         d.drawText((int) getRec().getUpperLeft().getX()
                         + (int) (0.5 * getRec().getWidth()) - 20,
-                (int) getRec().getUpperLeft().getY() +
-                        (int) (0.5 * getRec().getHeight()) + 5,
+                (int) getRec().getUpperLeft().getY()
+                        + (int) (0.5 * getRec().getHeight()) + 5,
                 "Score: " + this.scoreCounter.getValue(), 12);
 
 
@@ -67,6 +70,7 @@ public class ScoreIndicator implements Sprite {
 
     /**
      * getter for Rectangle.
+     *
      * @return Rectangle .
      */
     public Rectangle getRec() {
@@ -76,6 +80,7 @@ public class ScoreIndicator implements Sprite {
 
     /**
      * getter for Score counter.
+     *
      * @return Counter.
      */
     public Counter getScoreCounter() {

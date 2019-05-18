@@ -1,6 +1,7 @@
 
 package sprite;
-import geometry.*;
+
+import geometry.Point;
 
 
 /**
@@ -41,9 +42,9 @@ public class Frame {
     /**
      * a constructor of a frame.
      *
-     * @param p .
+     * @param p      .
      * @param height .
-     * @param width .
+     * @param width  .
      */
     public Frame(Point p, int height, int width) {
         this.startingPoint = p;

@@ -4,9 +4,11 @@ import counter.Counter;
 import game.Game;
 import sprite.Ball;
 import sprite.Block;
+
 /**
  * a BallRemover is in charge of removing balls from the game, as well as keeping count
  * of the number of balls that remain.
+ *
  * @author Tomer Yona
  * @version 1.2 4 Apr 2019
  */
@@ -18,7 +20,7 @@ public class BallRemover implements HitListener {
      * constructor of BallRemover.
      * @param myGame .
      */
-    public BallRemover(Game myGame){
+    public BallRemover(Game myGame) {
         this.game = myGame;
         this.ballsLeft = null;
     }
@@ -28,7 +30,7 @@ public class BallRemover implements HitListener {
      * @param myGame .
      * @param ballsRemaining .
      */
-    public BallRemover(Game myGame, Counter ballsRemaining){
+    public BallRemover(Game myGame, Counter ballsRemaining) {
         this.game = myGame;
         this.ballsLeft = ballsRemaining;
     }

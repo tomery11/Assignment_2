@@ -37,14 +37,10 @@ public class SpriteCollection {
      * call timePassed() on all sprites.
      */
     public void notifyAllTimePassed() {
-        for (int i = 0; i < spriteList.size(); i++){
+        for (int i = 0; i < spriteList.size(); i++) {
             spriteList.get(i).timePassed();
         }
-        /*
-        for (Sprite i : spriteList) {
-            i.timePassed();
-        }
-        */
+
     }
 
 

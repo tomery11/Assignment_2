@@ -1,9 +1,12 @@
 package sprite;
+
 import collision.HitListener;
 import collision.HitNotifier;
 import collision.Velocity;
-import game.*;
-import geometry.*;
+
+import geometry.Point;
+import geometry.Rectangle;
+import geometry.Line;
 import biuoop.DrawSurface;
 import collision.Collidable;
 
@@ -27,29 +30,31 @@ public class FrameBoundary implements Sprite, Collidable, HitNotifier {
      * constructor.
      *
      * @param frameRectangle .
+     * @param isDeathRegion .
      */
-    /*
-    public FrameBoundary(Rectangle frameRectangle) {
-        this.frameRec = frameRectangle;
-    }
-    */
     public FrameBoundary(Rectangle frameRectangle, boolean isDeathRegion) {
         this.frameRec = frameRectangle;
         this.deathRegion = isDeathRegion;
-        if (isDeathRegion){
+        if (isDeathRegion) {
             this.hitListeners = new ArrayList<HitListener>();
             this.hitsOnDeathReigon = 3;
         }
     }
 
-    public FrameBoundary(Rectangle frameRectangle, boolean isDeathRegion,boolean isScoreIndicator) {
+    /**
+     * Constructor.
+     * @param frameRectangle .
+     * @param isDeathRegion .
+     * @param isScoreIndicator .
+     */
+    public FrameBoundary(Rectangle frameRectangle, boolean isDeathRegion, boolean isScoreIndicator) {
         this.frameRec = frameRectangle;
         this.deathRegion = isDeathRegion;
-        if (isDeathRegion){
+        if (isDeathRegion) {
             this.hitListeners = new ArrayList<HitListener>();
             this.hitsOnDeathReigon = 3;
         }
-        if (isScoreIndicator){
+        if (isScoreIndicator) {
             this.hitListeners = new ArrayList<HitListener>();
 
         }
@@ -72,9 +77,7 @@ public class FrameBoundary implements Sprite, Collidable, HitNotifier {
      * @return Velocity
      */
     public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
-        if (this.deathRegion){
 
-        }
         // we get the lines of the rectangle.
         Line l1 = this.frameRec.getUpperLine();
         Line l2 = this.frameRec.getLowerLine();
@@ -102,7 +105,7 @@ public class FrameBoundary implements Sprite, Collidable, HitNotifier {
      */
     public void drawOn(DrawSurface d) {
         // draw a frame in color Black.
-        if (!this.deathRegion){
+        if (!this.deathRegion) {
             d.setColor(Color.BLACK);
 
         }
@@ -110,9 +113,9 @@ public class FrameBoundary implements Sprite, Collidable, HitNotifier {
         d.drawRectangle((int) frameRec.getUpperLeft().getX(),
                 (int) frameRec.getUpperLeft().getY(),
                 (int) frameRec.getWidth(), (int) frameRec.getHeight());
-        if (this.deathRegion){
+        if (this.deathRegion) {
             d.setColor(new Color(0, 0, 153));
-        }else {
+        } else {
             d.setColor(Color.GRAY);
         }
 
@@ -120,7 +123,7 @@ public class FrameBoundary implements Sprite, Collidable, HitNotifier {
                 (int) frameRec.getUpperLeft().getY(), (int) frameRec.getWidth(),
                 (int) frameRec.getHeight());
         d.setColor(Color.WHITE);
-        if (!this.deathRegion){
+        if (!this.deathRegion) {
             d.drawText((int) this.frameRec.getUpperLeft().getX()
                             + (int) (0.5 * this.frameRec.getWidth()),
                     (int) this.frameRec.getUpperLeft().getY() + (int) (0.5 * this.frameRec.getHeight()),
@@ -147,8 +150,4 @@ public class FrameBoundary implements Sprite, Collidable, HitNotifier {
         this.hitListeners.remove(hl);
     }
 
-
-    public List<HitListener> getHitListeners() {
-        return hitListeners;
-    }
 }
