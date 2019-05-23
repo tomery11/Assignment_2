@@ -1,4 +1,4 @@
-package levels;
+package background;
 
 import biuoop.DrawSurface;
 import sprite.Sprite;

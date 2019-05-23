@@ -2,6 +2,7 @@
 
 import game.GameLevel;
 import levels.ClassicLevel;
+import levels.DirectHit;
 import levels.LevelInformation;
 
 /**
@@ -19,7 +20,9 @@ public class Ass5Game {
     public static void main(String[] args) {
         //create game.
         ClassicLevel classicLevel = new ClassicLevel();
-        GameLevel game = new GameLevel(classicLevel);
+        DirectHit directHitLevel = new DirectHit();
+
+        GameLevel game = new GameLevel(directHitLevel);
         //init game.
         game.initialize();
         //run game

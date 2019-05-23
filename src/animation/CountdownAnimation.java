@@ -43,19 +43,24 @@ public class CountdownAnimation implements Animation {
         d.setColor(new Color(0, 0, 153));
         d.fillRectangle(0, 0, 800, 600);
         this.gameSprites.drawAllOn(d);
-        int count = this.startCount;
+
 
         d.setColor(Color.RED);
         d.drawText(400, 400, Integer.toString(startCount), 40);
-        this.sleeper.sleepFor(2000);
+
         this.decreaseCount();
+        if (this.startCount < 3) {
+            this.sleeper.sleepFor(2000);
+        }
         if (0 == this.startCount) {
             d.setColor(new Color(0, 0, 153));
             d.fillRectangle(0, 0, 800, 600);
             this.gameSprites.drawAllOn(d);
             d.setColor(Color.RED);
-            d.drawText(300, 400, "Go!", 90);
             this.sleeper.sleepFor(2000);
+            d.drawText(300, 400, "Go!", 90);
+
+
         }
 
     }

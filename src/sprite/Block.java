@@ -61,12 +61,12 @@ public class Block implements Collidable, Sprite, HitNotifier {
      * @param rec .
      * @param c   .
      */
-    public Block(Rectangle rec, Color c) {
+    public Block(Rectangle rec, Color c, int numberOfHits) {
         this.rectangle = rec;
         this.color = c;
-        hits = "2";
+        hits = Integer.toString(numberOfHits);
         this.hitListeners = new ArrayList<HitListener>();
-        this.numOfHits = 2;
+        this.numOfHits = numberOfHits;
     }
 
     /**

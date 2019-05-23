@@ -39,7 +39,7 @@ public class DeathRegion extends Block {
      * @param c   .
      */
     public DeathRegion(Rectangle rec, Color c) {
-        super(rec, c);
+        super(rec, c,0);
 
     }
 

@@ -1,5 +1,7 @@
 package levels;
 
+import background.Background;
+import background.ClassicBackground;
 import collision.Velocity;
 import geometry.Point;
 import geometry.Rectangle;
@@ -58,7 +60,7 @@ public class ClassicLevel implements LevelInformation {
      */
     @Override
     public Sprite getBackground() {
-        return new Background(new Color(0, 0, 153));
+        return new ClassicBackground(new Color(0, 0, 153));
     }
 
     /**
@@ -77,7 +79,7 @@ public class ClassicLevel implements LevelInformation {
             int x = 160;
             for (int j = 0; j < 10; j++) {
                 color = getColorOfRow(i);
-                Block block = new Block(new Rectangle(new Point(x, y), 40, 30), color);
+                Block block = new Block(new Rectangle(new Point(x, y), 40, 30), color,2);
                 //block.setPosition(counter);
                 blocks.add(block);
 

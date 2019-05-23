@@ -1,5 +1,7 @@
 package levels;
 
+import background.Background;
+import background.DirectHitBackground;
 import collision.Velocity;
 import geometry.Point;
 import geometry.Rectangle;
@@ -24,7 +26,9 @@ public class DirectHit implements LevelInformation {
      */
     @Override
     public List<Velocity> initialBallVelocities() {
-        return null;
+        List<Velocity> list = new ArrayList<Velocity>();
+        list.add(new Velocity(2, 2));
+        return list;
     }
 
     @Override
@@ -54,7 +58,7 @@ public class DirectHit implements LevelInformation {
      */
     @Override
     public Sprite getBackground() {
-        return new Background(Color.black);
+        return new DirectHitBackground(Color.black);
     }
 
     /**
@@ -67,7 +71,9 @@ public class DirectHit implements LevelInformation {
     public List<Block> blocks() {
         List<Block> blocks = new ArrayList<Block>();
 
-        Block toAdd = new Block(new Rectangle(new Point(290, 190), 20, 20), Color.RED);
+        Block toAdd = new Block(new Rectangle(new Point(290, 190), 20, 20),
+                Color.RED, 1);
+        toAdd.setNumOfHits(1);
         blocks.add(toAdd);
         return blocks;
     }
@@ -81,6 +87,6 @@ public class DirectHit implements LevelInformation {
      */
     @Override
     public int numberOfBlocksToRemove() {
-        return 1;
+        return this.blocks().size();
     }
 }
