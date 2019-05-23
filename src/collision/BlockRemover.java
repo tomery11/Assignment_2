@@ -1,7 +1,7 @@
 package collision;
 
 import counter.Counter;
-import game.Game;
+import game.GameLevel;
 import sprite.Ball;
 import sprite.Block;
 
@@ -15,7 +15,7 @@ import sprite.Block;
  */
 public class BlockRemover implements HitListener {
 
-    private Game game;
+    private GameLevel game;
     private Counter remainingBlocks;
 
 
@@ -24,7 +24,7 @@ public class BlockRemover implements HitListener {
      *
      * @param currGame .
      */
-    public BlockRemover(Game currGame) {
+    public BlockRemover(GameLevel currGame) {
         this.game = currGame;
     }
 
@@ -35,7 +35,7 @@ public class BlockRemover implements HitListener {
      * @param currGame      .
      * @param removedBlocks .
      */
-    public BlockRemover(Game currGame, Counter removedBlocks) {
+    public BlockRemover(GameLevel currGame, Counter removedBlocks) {
         this.game = currGame;
         this.remainingBlocks = removedBlocks;
     }

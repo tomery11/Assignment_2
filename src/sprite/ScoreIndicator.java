@@ -18,17 +18,21 @@ import java.util.List;
 public class ScoreIndicator implements Sprite {
     private Counter scoreCounter;
     private Rectangle rec;
+    private Counter livesCounter;
     private List<HitListener> hitListeners;
+    private String level;
 
     /**
      * constructor.
      *
      * @param frameRectangle .
      */
-    public ScoreIndicator(Rectangle frameRectangle) {
+    public ScoreIndicator(Rectangle frameRectangle, int lives,String levelName) {
         this.rec = frameRectangle;
         this.scoreCounter = new Counter(0);
         this.hitListeners = new ArrayList<HitListener>();
+        this.livesCounter = new Counter(lives);
+        this.level = levelName;
 
     }
 
@@ -56,6 +60,16 @@ public class ScoreIndicator implements Sprite {
                 (int) getRec().getUpperLeft().getY()
                         + (int) (0.5 * getRec().getHeight()) + 5,
                 "Score: " + this.scoreCounter.getValue(), 12);
+        d.drawText((int) getRec().getUpperLeft().getX()
+                        + (int) (0.5 * getRec().getWidth()) - 160,
+                (int) getRec().getUpperLeft().getY()
+                        + (int) (0.5 * getRec().getHeight()) + 5,
+                "Lives: " + this.livesCounter.getValue(), 12);
+        d.drawText((int) getRec().getUpperLeft().getX()
+                        + (int) (0.5 * getRec().getWidth()) + 120,
+                (int) getRec().getUpperLeft().getY()
+                        + (int) (0.5 * getRec().getHeight()) + 5,
+                "Level: " + this.getLevel(), 12);
 
 
     }
@@ -85,5 +99,13 @@ public class ScoreIndicator implements Sprite {
      */
     public Counter getScoreCounter() {
         return scoreCounter;
+    }
+
+    public Counter getLivesCounter() {
+        return livesCounter;
+    }
+
+    public String getLevel() {
+        return level;
     }
 }

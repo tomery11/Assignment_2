@@ -1,6 +1,6 @@
 package sprite;
 
-import game.Game;
+import game.GameLevel;
 import geometry.Point;
 import geometry.Rectangle;
 import collision.Collidable;
@@ -210,7 +210,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
      *
      * @param game .
      */
-    public void removeFromGame(Game game) {
+    public void removeFromGame(GameLevel game) {
         game.removeSprite(this);
         game.removeCollidable(this);
     }

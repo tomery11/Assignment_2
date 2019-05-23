@@ -4,7 +4,7 @@ package sprite;
 
 import biuoop.DrawSurface;
 
-import game.Game;
+import game.GameLevel;
 import game.GameEnvironment;
 import geometry.Point;
 import geometry.Line;
@@ -245,7 +245,7 @@ public class Ball implements Sprite {
      * add the ball to a game.
      * @param myGame .
      */
-    public void addToGame(Game myGame) {
+    public void addToGame(GameLevel myGame) {
         myGame.addSprite(this);
     }
 
@@ -253,7 +253,7 @@ public class Ball implements Sprite {
      * removes the ball from the game.
      * @param myGame .
      */
-    public void removeFromGame(Game myGame) {
+    public void removeFromGame(GameLevel myGame) {
         myGame.removeSprite(this);
     }
 

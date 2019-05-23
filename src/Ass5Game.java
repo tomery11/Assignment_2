@@ -1,6 +1,8 @@
 
 
-import game.*;
+import game.GameLevel;
+import levels.ClassicLevel;
+import levels.LevelInformation;
 
 /**
  * runs a game as a final test for the assignment.
@@ -16,7 +18,8 @@ public class Ass5Game {
      */
     public static void main(String[] args) {
         //create game.
-        Game game = new Game();
+        ClassicLevel classicLevel = new ClassicLevel();
+        GameLevel game = new GameLevel(classicLevel);
         //init game.
         game.initialize();
         //run game

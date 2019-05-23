@@ -1,12 +1,12 @@
 package sprite;
 
 import biuoop.DrawSurface;
-import collision.HitListener;
+
 import counter.Counter;
 import geometry.Rectangle;
 
 import java.awt.Color;
-import java.util.List;
+
 
 /**
  * a sprite that represents a life indicator bar .
@@ -17,7 +17,7 @@ import java.util.List;
 public class LivesIndicator implements Sprite {
     private Counter livesCounter;
     private Rectangle rec;
-    private List<HitListener> hitListeners;
+
 
     /**
      * Constructor of Life indicator.

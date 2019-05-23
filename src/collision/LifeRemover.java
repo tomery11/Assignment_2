@@ -1,7 +1,7 @@
 package collision;
 
 import counter.Counter;
-import game.Game;
+import game.GameLevel;
 import sprite.Ball;
 import sprite.Block;
 
@@ -13,7 +13,7 @@ import sprite.Block;
  * @version 1.2 4 Apr 2019
  */
 public class LifeRemover implements HitListener {
-    private Game game;
+    private GameLevel game;
     private Counter livesLeft;
 
     /**
@@ -21,7 +21,7 @@ public class LifeRemover implements HitListener {
      *
      * @param myGame .
      */
-    public LifeRemover(Game myGame) {
+    public LifeRemover(GameLevel myGame) {
         this.game = myGame;
         this.livesLeft = null;
     }
@@ -32,7 +32,7 @@ public class LifeRemover implements HitListener {
      * @param myGame        .
      * @param lifeRemaining .
      */
-    public LifeRemover(Game myGame, Counter lifeRemaining) {
+    public LifeRemover(GameLevel myGame, Counter lifeRemaining) {
         this.game = myGame;
         this.livesLeft = lifeRemaining;
     }

@@ -3,6 +3,13 @@ package collision;
 import sprite.Ball;
 import sprite.Block;
 
+
+/**
+ * Printing Hit Listener test.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class PrintingHitListener implements HitListener {
     //figure out what needs to be implemented here.
 
