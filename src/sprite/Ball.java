@@ -109,6 +109,25 @@ public class Ball implements Sprite {
     }
 
     /**
+     * constuctor.
+     * @param p .
+     * @param i2 .
+     * @param red .
+     * @param frame .
+     * @param gameEnvironment1 .
+     * @param v .
+     */
+    public Ball(Point p, int i2, Color red, Frame frame, GameEnvironment gameEnvironment1, Velocity v) {
+        this.center = p;
+        this.r = i2;
+        this.color = red;
+        this.frame = frame;
+        this.gameEnvironment = gameEnvironment1;
+        this.velocity = v;
+
+    }
+
+    /**
      * getter of x point.
      *
      * @return int
@@ -152,6 +171,8 @@ public class Ball implements Sprite {
     public void drawOn(DrawSurface surface) {
         surface.setColor(this.color);
         surface.fillCircle(this.getX(), this.getY(), this.r);
+        surface.setColor(Color.black);
+        surface.drawCircle(this.getX(), this.getY(), this.r);
     }
 
     @Override

@@ -8,7 +8,7 @@ import geometry.Rectangle;
 import sprite.Block;
 import sprite.Sprite;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class DirectHit implements LevelInformation {
     @Override
     public List<Velocity> initialBallVelocities() {
         List<Velocity> list = new ArrayList<Velocity>();
-        list.add(new Velocity(2, 2));
+        list.add(new Velocity(0, 2));
         return list;
     }
 
@@ -71,7 +71,7 @@ public class DirectHit implements LevelInformation {
     public List<Block> blocks() {
         List<Block> blocks = new ArrayList<Block>();
 
-        Block toAdd = new Block(new Rectangle(new Point(290, 190), 20, 20),
+        Block toAdd = new Block(new Rectangle(new Point(390, 190), 20, 20),
                 Color.RED, 1);
         toAdd.setNumOfHits(1);
         blocks.add(toAdd);
@@ -88,5 +88,12 @@ public class DirectHit implements LevelInformation {
     @Override
     public int numberOfBlocksToRemove() {
         return this.blocks().size();
+    }
+
+    @Override
+    public List<Point> LocaitonOfBall() {
+        List<Point> points = new ArrayList<Point>();
+        points.add(new Point(400,400));
+        return points;
     }
 }

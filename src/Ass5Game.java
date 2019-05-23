@@ -1,9 +1,7 @@
 
 
 import game.GameLevel;
-import levels.ClassicLevel;
-import levels.DirectHit;
-import levels.LevelInformation;
+import levels.*;
 
 /**
  * runs a game as a final test for the assignment.
@@ -21,8 +19,11 @@ public class Ass5Game {
         //create game.
         ClassicLevel classicLevel = new ClassicLevel();
         DirectHit directHitLevel = new DirectHit();
+        WideEasyLevel wideEasyLevel = new WideEasyLevel();
+        Green3Level green3Level = new Green3Level();
+        FinalFour finalFourLevel = new FinalFour();
 
-        GameLevel game = new GameLevel(directHitLevel);
+        GameLevel game = new GameLevel(finalFourLevel);
         //init game.
         game.initialize();
         //run game

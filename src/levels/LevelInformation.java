@@ -1,6 +1,7 @@
 package levels;
 
 import collision.Velocity;
+import geometry.Point;
 import sprite.Block;
 import sprite.Sprite;
 
@@ -57,4 +58,7 @@ public interface LevelInformation {
      * @return int .
      */
     public int numberOfBlocksToRemove();
+
+
+    public List<Point> LocaitonOfBall();
 }

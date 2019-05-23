@@ -21,6 +21,7 @@ public class CountdownAnimation implements Animation {
     private int startCount;
     private SpriteCollection gameSprites;
     private Sleeper sleeper;
+    private long time;
 
 
     public CountdownAnimation(double numOfSeconds,
@@ -30,6 +31,7 @@ public class CountdownAnimation implements Animation {
         this.startCount = countFrom;
         this.gameSprites = gameScreen;
         this.sleeper = new Sleeper();
+        this.time = (long) this.seconds / this.startCount;
     }
 
 
@@ -40,26 +42,20 @@ public class CountdownAnimation implements Animation {
      */
     @Override
     public void doOneFrame(DrawSurface d) {
-        d.setColor(new Color(0, 0, 153));
-        d.fillRectangle(0, 0, 800, 600);
-        this.gameSprites.drawAllOn(d);
-
-
+        gameSprites.drawAllOn(d);
         d.setColor(Color.RED);
-        d.drawText(400, 400, Integer.toString(startCount), 40);
 
-        this.decreaseCount();
-        if (this.startCount < 3) {
-            this.sleeper.sleepFor(2000);
+        if (this.startCount > 0){
+            d.drawText(400, 400, Integer.toString(startCount), 40);
         }
-        if (0 == this.startCount) {
-            d.setColor(new Color(0, 0, 153));
-            d.fillRectangle(0, 0, 800, 600);
-            this.gameSprites.drawAllOn(d);
-            d.setColor(Color.RED);
-            this.sleeper.sleepFor(2000);
+        this.startCount--;
+        //this.decreaseCount();
+        if (this.startCount < 2 && this.startCount > -1) {
+            this.sleeper.sleepFor(this.time);
+        }
+        if (this.startCount <= -1) {
             d.drawText(300, 400, "Go!", 90);
-
+            this.sleeper.sleepFor(this.time);
 
         }
 
@@ -72,23 +68,11 @@ public class CountdownAnimation implements Animation {
      */
     @Override
     public boolean shouldStop() {
-        return (this.startCount == 0);
-    }
-
-    public void setSeconds(double seconds) {
-        this.seconds = seconds;
+        return (this.startCount == -3);
     }
 
 
-    public void setStartCount(int startCount) {
-        this.startCount = startCount;
-    }
 
-    public void decreaseCount() {
-        if (this.startCount == 0) {
-            setStartCount(3);
-        } else {
-            this.startCount--;
-        }
-    }
+
+
 }

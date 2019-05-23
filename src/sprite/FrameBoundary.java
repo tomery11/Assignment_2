@@ -123,12 +123,7 @@ public class FrameBoundary implements Sprite, Collidable, HitNotifier {
                 (int) frameRec.getUpperLeft().getY(), (int) frameRec.getWidth(),
                 (int) frameRec.getHeight());
         d.setColor(Color.WHITE);
-        if (!this.deathRegion) {
-            d.drawText((int) this.frameRec.getUpperLeft().getX()
-                            + (int) (0.5 * this.frameRec.getWidth()),
-                    (int) this.frameRec.getUpperLeft().getY() + (int) (0.5 * this.frameRec.getHeight()),
-                    "X", 20);
-        }
+
 
     }
 

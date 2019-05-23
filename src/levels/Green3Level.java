@@ -1,7 +1,6 @@
 package levels;
 
-import background.Background;
-import background.ClassicBackground;
+import background.Green3Background;
 import collision.Velocity;
 import geometry.Point;
 import geometry.Rectangle;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ClassicLevel implements LevelInformation {
+public class Green3Level implements LevelInformation {
     @Override
     public int numberOfBalls() {
         return 2;
@@ -50,7 +49,7 @@ public class ClassicLevel implements LevelInformation {
      */
     @Override
     public String levelName() {
-        return "Classic";
+        return "Green 3";
     }
 
     /**
@@ -60,7 +59,7 @@ public class ClassicLevel implements LevelInformation {
      */
     @Override
     public Sprite getBackground() {
-        return new ClassicBackground(new Color(0, 0, 153));
+        return new Green3Background(new Color(0, 127, 70));
     }
 
     /**
@@ -71,25 +70,54 @@ public class ClassicLevel implements LevelInformation {
      */
     @Override
     public List<Block> blocks() {
+
         List<Block> blocks = new ArrayList<Block>();
+        Random rand = new Random();
+        Point upperLeft;
+        double width = 40;
+        double height = 20;
+        double numberOfBlocks = 12; // number of block in each row;
         Color color;
-        int counter = 0;
-        int y = 140;
         for (int i = 0; i < 5; i++) {
-            int x = 160;
-            for (int j = 0; j < 10; j++) {
-                color = getColorOfRow(i);
-                Block block = new Block(new Rectangle(new Point(x, y), 40, 30), color,2);
-                //block.setPosition(counter);
-                blocks.add(block);
-
-                x += 50;
-                counter++;
+            switch (i) {
+                case 0:
+                    color = Color.GRAY;
+                    break;
+                case 1:
+                    color = Color.RED;
+                    break;
+                case 2:
+                    color = Color.YELLOW;
+                    break;
+                case 3:
+                    color = Color.BLUE;
+                    break;
+                case 4:
+                    color = Color.white;
+                    break;
+                case 5:
+                    color = Color.green;
+                    break;
+                default:
+                    color = new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
             }
-            y += 40;
-        }
-        return blocks;
+            upperLeft = new Point(0, 20 * i + 150);
+            for (int j = 0; j < numberOfBlocks - i; j++) {
+                Point blockUpperLeft = new Point(800 - 90 - j * 40, upperLeft.getY());
+                Block tempBlock;
+                if (i == 0) {
+                    tempBlock = new Block(new geometry.Rectangle(blockUpperLeft, width, height),color,2);
+                    blocks.add(tempBlock);
+                } else {
+                    tempBlock = new Block(new Rectangle(blockUpperLeft, width, height), color, 1);
+                    blocks.add(tempBlock);
+                }
 
+            }
+        }
+
+
+        return blocks;
     }
 
     /**
@@ -101,7 +129,7 @@ public class ClassicLevel implements LevelInformation {
      */
     @Override
     public int numberOfBlocksToRemove() {
-        return this.blocks().size();
+        return blocks().size();
     }
 
     @Override
@@ -110,39 +138,5 @@ public class ClassicLevel implements LevelInformation {
         points.add(new Point(400,400));
         points.add(new Point(200,400));
         return points;
-    }
-
-    /**
-     * this function get a number that represents a row and returns a color.
-     *
-     * @param i .
-     * @return ColorCreator
-     */
-    public Color getColorOfRow(int i) {
-        Random rand = new Random();
-        Color color;
-        switch (i) {
-            case 0:
-                color = Color.GRAY;
-                break;
-            case 1:
-                color = Color.RED;
-                break;
-            case 2:
-                color = Color.YELLOW;
-                break;
-            case 3:
-                color = Color.BLUE;
-                break;
-            case 4:
-                color = Color.pink;
-                break;
-            case 5:
-                color = Color.green;
-                break;
-            default:
-                color = new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
-        }
-        return color;
     }
 }

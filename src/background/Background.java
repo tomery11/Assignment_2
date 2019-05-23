@@ -20,16 +20,16 @@ public class Background implements Sprite{
      */
     @Override
     public void drawOn(DrawSurface d) {
-        //d.setColor(new Color(0, 0, 153));
+        //d.setColor(new ColorCreator(0, 0, 153));
         //d.fillRectangle(0, 0, 800, 600);
         if (this.color != null) {
             d.setColor(this.color);
             d.fillRectangle(0, 0, 800, 600);
         }
         /*
-        d.setColor(Color.RED);
+        d.setColor(ColorCreator.RED);
         //d.drawRectangle(290,190,310,210);
-        d.setColor(Color.blue);
+        d.setColor(ColorCreator.blue);
         d.drawCircle(50,300,200);
         d.drawCircle(100,300,200);
         d.drawCircle(150,300,200);

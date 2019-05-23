@@ -173,10 +173,12 @@ public class Block implements Collidable, Sprite, HitNotifier {
                 (int) this.rectangle.getWidth(), (int) this.rectangle.getHeight());
         surface.setColor(Color.WHITE);
         // here we will draw the number of hits on the blocks
+        /*
         surface.drawText((int) this.rectangle.getUpperLeft().getX()
                         + (int) (0.5 * this.rectangle.getWidth()),
                 (int) this.rectangle.getUpperLeft().getY() + (int) (0.5 * this.rectangle.getHeight()),
                 getHits(), 20);
+                */
     }
 
     @Override

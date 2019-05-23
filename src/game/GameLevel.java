@@ -116,7 +116,8 @@ public class GameLevel implements Animation {
      * add the paddle to the game.
      */
     public void addPaddleToGame() {
-        Rectangle sizeOfPaddle = new Rectangle(new Point(300, 545), this.currentLevel.paddleWidth(), 20);
+        Rectangle sizeOfPaddle = new Rectangle(new Point(400 - (this.currentLevel.paddleWidth() / 2), 545),
+                this.currentLevel.paddleWidth(), 20);
         Paddle paddle = new Paddle(sizeOfPaddle, this.runner.getGui());
         paddle.addToGame(this);
     }
@@ -145,7 +146,7 @@ public class GameLevel implements Animation {
 
 /*
         for (int i = 0; i < numOfLines; i++) {
-            Color c = getColorOfRow(i);
+            ColorCreator c = getColorOfRow(i);
             upperLeft = new Point(30, height * i + 150);
             // this loop is creating the block for each row
             for (int j = 0; j < numOfBlocks; j++) {
@@ -189,7 +190,7 @@ public class GameLevel implements Animation {
         //adds the balls to surface
         this.createBallsOnTopOfPaddle();
         //doesn't work correctly
-        this.runner.run(new CountdownAnimation(3, 3, this.sprites));
+        this.runner.run(new CountdownAnimation(2000, 3, this.sprites));
 
         //this.running can start running back again.
         this.running = true;
@@ -208,8 +209,10 @@ public class GameLevel implements Animation {
         Ball[] myBalls = new Ball[this.currentLevel.numberOfBalls()];
 
         for (int i = 0; i < myBalls.length; i++) {
-            myBalls[i] = new Ball(x + i * 80, 350, 5, Color.WHITE, frame, this.environment,
+            myBalls[i] = new Ball(this.currentLevel.LocaitonOfBall().get(i),5, Color.WHITE, frame, this.environment,
                     this.currentLevel.initialBallVelocities().get(i));
+            //myBalls[i] = new Ball(x + i * 80, 350, 5, Color.WHITE, frame, this.environment,
+                    //this.currentLevel.initialBallVelocities().get(i));
             this.sprites.addSprite(myBalls[i]);
 
         }
