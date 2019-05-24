@@ -23,7 +23,7 @@ public class Ass5Game {
         Green3Level green3Level = new Green3Level();
         FinalFour finalFourLevel = new FinalFour();
 
-        GameLevel game = new GameLevel(finalFourLevel);
+        GameLevel game = new GameLevel(green3Level);
         //init game.
         game.initialize();
         //run game

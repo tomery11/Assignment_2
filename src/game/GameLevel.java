@@ -69,12 +69,29 @@ public class GameLevel implements Animation {
         this.ballCounter = new Counter(0);
         this.lifeCounter = new Counter(4);
         this.scoreBoard = new ScoreIndicator(new Rectangle(new Point(0, 0), 800, 20),
-                lifeCounter.getValue(), this.currentLevel.levelName());
+                this.lifeCounter, this.currentLevel.levelName());
 
 
         this.runner = new AnimationRunner();
         this.running = true;
         this.keyboard = this.runner.getGui().getKeyboardSensor();
+
+
+    }
+
+
+    public GameLevel(LevelInformation levelInfo, AnimationRunner ar, KeyboardSensor ks,
+                     Counter lives, ScoreIndicator scoreBoard) {
+        this.currentLevel = levelInfo;
+        this.sprites = new SpriteCollection();
+        this.environment = new GameEnvironment();
+        this.blockCounter = new Counter(0);
+        this.runner = ar;
+        this.keyboard = ks;
+        this.lifeCounter = lives;
+        this.scoreBoard = scoreBoard;
+        this.scoreBoard.setLevel(this.currentLevel.levelName());
+        this.ballCounter = new Counter(0);
 
 
     }
@@ -131,9 +148,6 @@ public class GameLevel implements Animation {
      * @param height     .
      */
     public void addGameBlocks(int numOfLines, double width, double height) {
-        //DrawSurface drawSurface = this.runner.getGui().getDrawSurface();
-        //double widthOfScreen = drawSurface.getWidth() - 110;
-        //double numOfBlocks = widthOfScreen / width;
 
         //Point upperLeft;
         BlockRemover removeBlocks = new BlockRemover(this, this.blockCounter);
@@ -143,26 +157,6 @@ public class GameLevel implements Animation {
         ScoreTrackingListener scoreTracker = new ScoreTrackingListener(scoreBoard.getScoreCounter());
 
 
-
-/*
-        for (int i = 0; i < numOfLines; i++) {
-            ColorCreator c = getColorOfRow(i);
-            upperLeft = new Point(30, height * i + 150);
-            // this loop is creating the block for each row
-            for (int j = 0; j < numOfBlocks; j++) {
-                Point blockUpperLeft = new Point((widthOfScreen - j * width) + 10, upperLeft.getY());
-                //maybe in the future will add here num of hits.
-                Block tempBlock = new Block(new Rectangle(blockUpperLeft, width, height), c);
-                this.sprites.addSprite(tempBlock);
-                this.environment.addCollidable(tempBlock);
-                //add block to listener
-                tempBlock.addHitListener(removeBlocks);
-
-                //this.blockCounter.increase(1);
-                tempBlock.addHitListener(scoreTracker);
-            }
-
-        }*/
         List<Block> blocks = this.currentLevel.blocks();
         for (Block b : blocks) {
             b.addHitListener(removeBlocks);
@@ -205,14 +199,11 @@ public class GameLevel implements Animation {
     public void createBallsOnTopOfPaddle() {
 
         Frame frame = new Frame(new Point(0, 0), 600, 800);
-        int x = 120;
         Ball[] myBalls = new Ball[this.currentLevel.numberOfBalls()];
 
         for (int i = 0; i < myBalls.length; i++) {
-            myBalls[i] = new Ball(this.currentLevel.LocaitonOfBall().get(i),5, Color.WHITE, frame, this.environment,
+            myBalls[i] = new Ball(this.currentLevel.LocaitonOfBall().get(i), 5, Color.WHITE, frame, this.environment,
                     this.currentLevel.initialBallVelocities().get(i));
-            //myBalls[i] = new Ball(x + i * 80, 350, 5, Color.WHITE, frame, this.environment,
-                    //this.currentLevel.initialBallVelocities().get(i));
             this.sprites.addSprite(myBalls[i]);
 
         }
@@ -236,7 +227,7 @@ public class GameLevel implements Animation {
         if (this.blockCounter.getValue() == 0) {
             this.running = false;
             this.scoreBoard.getScoreCounter().increase(100);
-            this.runner.getGui().close();
+            //this.runner.getGui().close();
         }
         if (this.ballCounter.getValue() == 0) {
             this.running = false;
@@ -315,5 +306,30 @@ public class GameLevel implements Animation {
         this.sprites.getSpriteList().remove(s);
     }
 
+    /**
+     * getter.
+     *
+     * @return Counter.
+     */
+    public Counter getBallCounter() {
+        return ballCounter;
+    }
 
+    /**
+     * getter.
+     *
+     * @return Counter.
+     */
+    public Counter getBlockCounter() {
+        return blockCounter;
+    }
+
+    /**
+     * getter.
+     *
+     * @return Counter.
+     */
+    public Counter getLifeCounter() {
+        return lifeCounter;
+    }
 }

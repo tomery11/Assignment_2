@@ -27,13 +27,37 @@ public class ScoreIndicator implements Sprite {
      *
      * @param frameRectangle .
      */
-    public ScoreIndicator(Rectangle frameRectangle, int lives,String levelName) {
+    public ScoreIndicator(Rectangle frameRectangle, Counter lives, String levelName) {
+        this.rec = frameRectangle;
+        this.scoreCounter = new Counter(0);
+        this.hitListeners = new ArrayList<HitListener>();
+        this.livesCounter = lives;
+        this.level = levelName;
+
+    }
+
+
+    public ScoreIndicator(Rectangle frameRectangle, Counter lives) {
+        this.rec = frameRectangle;
+        this.scoreCounter = new Counter(0);
+        this.hitListeners = new ArrayList<HitListener>();
+        this.livesCounter = lives;
+
+    }
+
+
+
+    public ScoreIndicator(Rectangle frameRectangle, int lives) {
         this.rec = frameRectangle;
         this.scoreCounter = new Counter(0);
         this.hitListeners = new ArrayList<HitListener>();
         this.livesCounter = new Counter(lives);
-        this.level = levelName;
 
+
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     /**
