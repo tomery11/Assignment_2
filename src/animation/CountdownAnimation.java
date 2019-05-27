@@ -4,7 +4,7 @@ import biuoop.DrawSurface;
 import biuoop.Sleeper;
 import sprite.SpriteCollection;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * The CountdownAnimation will display the given gameScreen,
@@ -45,7 +45,7 @@ public class CountdownAnimation implements Animation {
         gameSprites.drawAllOn(d);
         d.setColor(Color.RED);
 
-        if (this.startCount > 0){
+        if (this.startCount > 0) {
             d.drawText(400, 400, Integer.toString(startCount), 40);
         }
         this.startCount--;
@@ -70,9 +70,6 @@ public class CountdownAnimation implements Animation {
     public boolean shouldStop() {
         return (this.startCount == -3);
     }
-
-
-
 
 
 }

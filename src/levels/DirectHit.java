@@ -1,6 +1,6 @@
 package levels;
 
-import background.Background;
+
 import background.DirectHitBackground;
 import collision.Velocity;
 import geometry.Point;
@@ -11,7 +11,12 @@ import sprite.Sprite;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * DirectHit Level.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class DirectHit implements LevelInformation {
     @Override
     public int numberOfBalls() {

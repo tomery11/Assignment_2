@@ -3,27 +3,19 @@ package animation;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 
-
-
-/**
- * PauseScreen class.
- *
- * @author Tomer Yona
- * @version 1.2 4 Apr 2019
- */
-public class PauseScreen implements Animation {
-
+public class KeyPressStoppableAnimation implements Animation{
 
     private boolean stop;
+    private KeyboardSensor keyboardSensor;
+    String keyPressed;
+    Animation animation;
 
-
-    /**
-     * constructor of PauseScreen.
-     */
-    public PauseScreen() {
+    public KeyPressStoppableAnimation(KeyboardSensor ks, String key,Animation myAnimation) {
+        this.keyboardSensor = ks;
+        this.keyPressed = key;
+        this.animation = myAnimation;
         this.stop = false;
     }
-
     /**
      * this function runs one frame each time it is called.
      *
@@ -31,12 +23,13 @@ public class PauseScreen implements Animation {
      */
     @Override
     public void doOneFrame(DrawSurface d) {
+        this.animation.doOneFrame(d);
+        if (this.keyboardSensor.isPressed(keyPressed)) {
+
+            this.stop = true;
 
 
-
-
-        d.drawText(10, d.getHeight() / 2, "paused -- press space to continue", 32);
-
+        }
     }
 
     /**

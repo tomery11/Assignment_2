@@ -7,11 +7,16 @@ import geometry.Rectangle;
 import sprite.Block;
 import sprite.Sprite;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+/**
+ * FinalFour Level.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class FinalFour implements LevelInformation{
     @Override
     public int numberOfBalls() {

@@ -56,6 +56,10 @@ public class ScoreIndicator implements Sprite {
 
     }
 
+    /**
+     * set level.
+     * @param level .
+     */
     public void setLevel(String level) {
         this.level = level;
     }
@@ -125,10 +129,18 @@ public class ScoreIndicator implements Sprite {
         return scoreCounter;
     }
 
+    /**
+     * getter.
+     * @return Counter .
+     */
     public Counter getLivesCounter() {
         return livesCounter;
     }
 
+    /**
+     * getter.
+     * @return String.
+     */
     public String getLevel() {
         return level;
     }

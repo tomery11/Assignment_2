@@ -3,8 +3,17 @@ package background;
 import biuoop.DrawSurface;
 
 import java.awt.Color;
-
+/**
+ * WideEasy Background.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class WideEasyBackground extends Background{
+    /**
+     * constructor.
+     * @param c .
+     */
     public WideEasyBackground(Color c) {
         super(c);
     }

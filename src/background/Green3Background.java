@@ -2,9 +2,18 @@ package background;
 
 import biuoop.DrawSurface;
 
-import java.awt.*;
-
+import java.awt.Color;
+/**
+ * Green3 background.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class Green3Background extends Background {
+    /**
+     * constructor.
+     * @param c .
+     */
     public Green3Background(Color c) {
         super(c);
     }
@@ -30,7 +39,6 @@ public class Green3Background extends Background {
             }
 
         }
-
 
     }
 }

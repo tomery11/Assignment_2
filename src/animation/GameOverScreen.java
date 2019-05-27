@@ -1,28 +1,24 @@
 package animation;
 
 import biuoop.DrawSurface;
-import biuoop.KeyboardSensor;
 
+import counter.Counter;
 
+import java.awt.Color;
 
-/**
- * PauseScreen class.
- *
- * @author Tomer Yona
- * @version 1.2 4 Apr 2019
- */
-public class PauseScreen implements Animation {
+public class GameOverScreen implements Animation {
 
 
     private boolean stop;
+    private Counter score;
 
 
-    /**
-     * constructor of PauseScreen.
-     */
-    public PauseScreen() {
+    public GameOverScreen(Counter myScore) {
+
         this.stop = false;
+        this.score = myScore;
     }
+
 
     /**
      * this function runs one frame each time it is called.
@@ -33,9 +29,12 @@ public class PauseScreen implements Animation {
     public void doOneFrame(DrawSurface d) {
 
 
-
-
-        d.drawText(10, d.getHeight() / 2, "paused -- press space to continue", 32);
+        d.setColor(Color.black);
+        d.fillRectangle(0, 0, 800, 600);
+        d.setColor(Color.RED);
+        String toPrint = "Game Over. Your score is " + this.score.getValue();
+        d.setColor(Color.RED);
+        d.drawText(180, 400, toPrint, 30);
 
     }
 

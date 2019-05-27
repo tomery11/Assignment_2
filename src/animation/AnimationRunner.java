@@ -2,7 +2,6 @@ package animation;
 
 import biuoop.DrawSurface;
 import biuoop.GUI;
-import biuoop.KeyboardSensor;
 import biuoop.Sleeper;
 
 /**
@@ -21,7 +20,7 @@ public class AnimationRunner {
      * constructor of AnimationRunner.
      */
     public AnimationRunner() {
-        this.gui = new GUI("araknoid", 800, 600);
+        this.gui = new GUI("Araknoid", 800, 600);
         this.framesPerSecond = 60;
         this.sleeper = new Sleeper();
 

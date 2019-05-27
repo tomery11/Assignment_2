@@ -1,10 +1,7 @@
 package game;
 
 
-import animation.Animation;
-import animation.AnimationRunner;
-import animation.CountdownAnimation;
-import animation.PauseScreen;
+import animation.*;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import collision.Collidable;
@@ -79,7 +76,14 @@ public class GameLevel implements Animation {
 
     }
 
-
+    /**
+     * constructor.
+     * @param levelInfo .
+     * @param ar .
+     * @param ks .
+     * @param lives .
+     * @param scoreBoard .
+     */
     public GameLevel(LevelInformation levelInfo, AnimationRunner ar, KeyboardSensor ks,
                      Counter lives, ScoreIndicator scoreBoard) {
         this.currentLevel = levelInfo;
@@ -221,7 +225,8 @@ public class GameLevel implements Animation {
         this.sprites.notifyAllTimePassed();
 
         if (this.keyboard.isPressed("p")) {
-            this.runner.run(new PauseScreen(this.keyboard));
+            //this.runner.run(new PauseScreen(this.keyboard));
+            this.runner.run(new KeyPressStoppableAnimation(this.keyboard, "space", new PauseScreen()));
         }
 
         if (this.blockCounter.getValue() == 0) {
@@ -255,7 +260,7 @@ public class GameLevel implements Animation {
         double width = drawSurface.getWidth();
 
         double height = drawSurface.getHeight();
-        //Ball tmpBall = new Ball();
+
         //upper frame
         FrameBoundary fB1 = new FrameBoundary(new Rectangle(new Point(0, 20), width, 30),
                 false);
@@ -332,4 +337,6 @@ public class GameLevel implements Animation {
     public Counter getLifeCounter() {
         return lifeCounter;
     }
+
+
 }

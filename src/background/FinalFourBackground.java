@@ -2,9 +2,18 @@ package background;
 
 import biuoop.DrawSurface;
 
-import java.awt.*;
-
+import java.awt.Color;
+/**
+ * Final Four Background.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class FinalFourBackground extends Background{
+    /**
+     * constructor.
+     * @param c .
+     */
     public FinalFourBackground(Color c) {
         super(c);
     }
@@ -28,9 +37,6 @@ public class FinalFourBackground extends Background{
         d.fillCircle(660,500,30);
         d.fillCircle(635,500,30);
         d.fillCircle(600,500,25);
-
-
-
 
     }
 }

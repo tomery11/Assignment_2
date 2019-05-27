@@ -2,18 +2,28 @@ package background;
 
 import biuoop.DrawSurface;
 
-import java.awt.*;
-
+import java.awt.Color;
+/**
+ * DirectHit Background.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class DirectHitBackground extends Background{
+    /**
+     * constructor.
+     * @param c .
+     */
     public DirectHitBackground(Color c) {
         super(c);
     }
 
     @Override
+    /**
+     * draw on surface.
+     */
     public void drawOn(DrawSurface d) {
         super.drawOn(d);
-        //d.setColor(ColorCreator.RED);
-        //d.drawRectangle(290,190,310,210);
         d.setColor(Color.blue);
         d.drawCircle(400,200,50);
         d.drawCircle(400,200,75);

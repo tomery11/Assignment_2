@@ -5,11 +5,22 @@ import sprite.Sprite;
 
 import java.awt.Color;
 
-public class Background implements Sprite{
+/**
+ * Background class.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
+public class Background implements Sprite {
     private Color color;
 
-
+    /**
+     * constructor.
+     *
+     * @param c .
+     */
     public Background(Color c) {
+
         this.color = c;
     }
 
@@ -26,15 +37,6 @@ public class Background implements Sprite{
             d.setColor(this.color);
             d.fillRectangle(0, 0, 800, 600);
         }
-        /*
-        d.setColor(ColorCreator.RED);
-        //d.drawRectangle(290,190,310,210);
-        d.setColor(ColorCreator.blue);
-        d.drawCircle(50,300,200);
-        d.drawCircle(100,300,200);
-        d.drawCircle(150,300,200);
-        d.drawLine(300,120,300,170);
-        */
     }
 
     /**
@@ -45,6 +47,10 @@ public class Background implements Sprite{
 
     }
 
+    /**
+     * getter for color background.
+     * @return Color.
+     */
     public Color getColor() {
         return color;
     }

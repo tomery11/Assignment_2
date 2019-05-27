@@ -6,7 +6,12 @@ import sprite.Block;
 import sprite.Sprite;
 
 import java.util.List;
-
+/**
+ * level info interface.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public interface LevelInformation {
 
     public int numberOfBalls();
