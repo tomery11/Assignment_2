@@ -11,21 +11,22 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 /**
  * FinalFour Level.
  *
  * @author Tomer Yona
  * @version 1.2 4 Apr 2019
  */
-public class FinalFour implements LevelInformation{
+public class FinalFour implements LevelInformation {
     @Override
     public int numberOfBalls() {
         return 3;
     }
 
     /**
-     * The initial velocity of each ball
-     * Note that initialBallVelocities().size() == numberOfBalls()
+     * The initial velocity of each ball.
+     * Note that initialBallVelocities().size() == numberOfBalls().
      *
      * @return List.
      */
@@ -59,13 +60,13 @@ public class FinalFour implements LevelInformation{
     }
 
     /**
-     * Returns a sprite with the background of the level
+     * Returns a sprite with the background of the level.
      *
      * @return Sprite
      */
     @Override
     public Sprite getBackground() {
-        return new FinalFourBackground(new Color(0,191,255));
+        return new FinalFourBackground(new Color(0, 191, 255));
     }
 
     /**
@@ -89,7 +90,7 @@ public class FinalFour implements LevelInformation{
             for (int j = 0; j < 15; j++) {
                 Point blockUpperLeft = new Point(30 + j * width, upperLeft.getY());
                 //maybe in the future will add here num of hits.
-                Block tempBlock = new Block(new Rectangle(blockUpperLeft,width,height),c,1);
+                Block tempBlock = new Block(new Rectangle(blockUpperLeft, width, height), c, 1);
                 blocks.add(tempBlock);
             }
 
@@ -110,14 +111,19 @@ public class FinalFour implements LevelInformation{
     }
 
     @Override
-    public List<Point> LocaitonOfBall() {
+    public List<Point> ballLocation() {
         List<Point> points = new ArrayList<Point>();
-        points.add(new Point(500,370));
-        points.add(new Point(400,350));
+        points.add(new Point(500, 370));
+        points.add(new Point(400, 350));
         points.add(new Point(300, 370));
         return points;
     }
 
+    /**
+     * get the color per row of blocks.
+     * @param i .
+     * @return Color .
+     */
     public Color getColorOfRow(int i) {
         Random rand = new Random();
         Color color;

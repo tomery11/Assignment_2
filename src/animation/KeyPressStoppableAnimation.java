@@ -3,33 +3,53 @@ package animation;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 
-public class KeyPressStoppableAnimation implements Animation{
+/**
+ * KeyPressStoppableAnimation class.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
+public class KeyPressStoppableAnimation implements Animation {
 
     private boolean stop;
     private KeyboardSensor keyboardSensor;
-    String keyPressed;
-    Animation animation;
+    private String keyPressed;
+    private Animation animation;
+    private boolean isAlreadyPressed;
 
-    public KeyPressStoppableAnimation(KeyboardSensor ks, String key,Animation myAnimation) {
+    /**
+     * constructor.
+     *
+     * @param ks          keyboardSensor.
+     * @param key         String.
+     * @param myAnimation Animation.
+     */
+    public KeyPressStoppableAnimation(KeyboardSensor ks, String key, Animation myAnimation) {
         this.keyboardSensor = ks;
         this.keyPressed = key;
         this.animation = myAnimation;
         this.stop = false;
+
+        this.isAlreadyPressed = true;
+
     }
+
     /**
      * this function runs one frame each time it is called.
      *
-     * @param d
+     * @param d .
      */
     @Override
     public void doOneFrame(DrawSurface d) {
+
         this.animation.doOneFrame(d);
-        if (this.keyboardSensor.isPressed(keyPressed)) {
-
+        if (this.keyboardSensor.isPressed(this.keyPressed) && !this.isAlreadyPressed) {
             this.stop = true;
-
-
         }
+        if( !(this.keyboardSensor.isPressed(keyPressed))){
+            this.isAlreadyPressed = false;
+        }
+
     }
 
     /**

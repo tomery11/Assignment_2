@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 /**
  * Classic Level.
  *
@@ -25,8 +26,8 @@ public class ClassicLevel implements LevelInformation {
     }
 
     /**
-     * The initial velocity of each ball
-     * Note that initialBallVelocities().size() == numberOfBalls()
+     * The initial velocity of each ball.
+     * Note that initialBallVelocities().size() == numberOfBalls() .
      *
      * @return List.
      */
@@ -59,9 +60,9 @@ public class ClassicLevel implements LevelInformation {
     }
 
     /**
-     * Returns a sprite with the background of the level
+     * Returns a sprite with the background of the level.
      *
-     * @return Sprite
+     * @return Sprite .
      */
     @Override
     public Sprite getBackground() {
@@ -84,7 +85,7 @@ public class ClassicLevel implements LevelInformation {
             int x = 160;
             for (int j = 0; j < 10; j++) {
                 color = getColorOfRow(i);
-                Block block = new Block(new Rectangle(new Point(x, y), 40, 30), color,2);
+                Block block = new Block(new Rectangle(new Point(x, y), 40, 30), color, 2);
                 //block.setPosition(counter);
                 blocks.add(block);
 
@@ -110,10 +111,10 @@ public class ClassicLevel implements LevelInformation {
     }
 
     @Override
-    public List<Point> LocaitonOfBall() {
+    public List<Point> ballLocation() {
         List<Point> points = new ArrayList<Point>();
-        points.add(new Point(400,400));
-        points.add(new Point(200,400));
+        points.add(new Point(400, 400));
+        points.add(new Point(200, 400));
         return points;
     }
 

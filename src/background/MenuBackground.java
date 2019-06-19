@@ -4,32 +4,29 @@ import biuoop.DrawSurface;
 
 import java.awt.Color;
 
-/**
- * Final Four Background.
- *
- * @author Tomer Yona
- * @version 1.2 4 Apr 2019
- */
-public class FinalFourBackground extends Background {
+public class MenuBackground extends Background{
     /**
      * constructor.
      *
      * @param c .
      */
-    public FinalFourBackground(Color c) {
+    public MenuBackground(Color c) {
         super(c);
     }
 
     @Override
     public void drawOn(DrawSurface d) {
         super.drawOn(d);
-        //rain
+
         d.setColor(Color.white);
-        for (int i = 0; i < 18; i++) {
-            d.drawLine(90 + i * 5, 400, 80 + i * 5, 600);
-            d.drawLine(590 + i * 5, 500, 580 + i * 5, 600);
-        }
-        d.setColor(Color.gray);
+        d.drawText(350,80,"Araknoid",40);
+        d.drawText(380,150,"Options",30);
+        d.drawText(350,200,"Press \"s\" to start a new game",30);
+        d.drawText(350,220,"Press \"h\" to see the high scores",30);
+        d.drawText(350,240,"Press \"q\" to quit",30);
+
+
+
         //first cloud
         d.fillCircle(160, 400, 30);
         d.fillCircle(135, 400, 30);

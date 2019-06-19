@@ -23,9 +23,10 @@ public class ScoreIndicator implements Sprite {
     private String level;
 
     /**
-     * constructor.
-     *
+     * Constructor.
      * @param frameRectangle .
+     * @param lives .
+     * @param levelName .
      */
     public ScoreIndicator(Rectangle frameRectangle, Counter lives, String levelName) {
         this.rec = frameRectangle;
@@ -36,7 +37,11 @@ public class ScoreIndicator implements Sprite {
 
     }
 
-
+    /**
+     * Constructor.
+     * @param frameRectangle .
+     * @param lives .
+     */
     public ScoreIndicator(Rectangle frameRectangle, Counter lives) {
         this.rec = frameRectangle;
         this.scoreCounter = new Counter(0);
@@ -45,8 +50,11 @@ public class ScoreIndicator implements Sprite {
 
     }
 
-
-
+    /**
+     * Constructor.
+     * @param frameRectangle .
+     * @param lives .
+     */
     public ScoreIndicator(Rectangle frameRectangle, int lives) {
         this.rec = frameRectangle;
         this.scoreCounter = new Counter(0);
@@ -58,10 +66,11 @@ public class ScoreIndicator implements Sprite {
 
     /**
      * set level.
-     * @param level .
+     *
+     * @param level1 .
      */
-    public void setLevel(String level) {
-        this.level = level;
+    public void setLevel(String level1) {
+        this.level = level1;
     }
 
     /**
@@ -131,6 +140,7 @@ public class ScoreIndicator implements Sprite {
 
     /**
      * getter.
+     *
      * @return Counter .
      */
     public Counter getLivesCounter() {
@@ -139,6 +149,7 @@ public class ScoreIndicator implements Sprite {
 
     /**
      * getter.
+     *
      * @return String.
      */
     public String getLevel() {

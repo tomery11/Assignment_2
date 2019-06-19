@@ -5,7 +5,7 @@ import biuoop.GUI;
 import biuoop.Sleeper;
 
 /**
- * AnimationRunner class, implements Animation interface
+ * AnimationRunner class, implements Animation interface.
  *
  * @author Tomer Yona
  * @version 1.2 4 Apr 2019
@@ -26,6 +26,11 @@ public class AnimationRunner {
 
     }
 
+    /**
+     * getter for gui .
+     *
+     * @return GUI .
+     */
     public GUI getGui() {
         return this.gui;
     }

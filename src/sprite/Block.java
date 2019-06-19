@@ -10,6 +10,7 @@ import collision.HitNotifier;
 import biuoop.DrawSurface;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,10 @@ public class Block implements Collidable, Sprite, HitNotifier {
     private String hits;
     private int numOfHits;
     private List<HitListener> hitListeners;
+    private List<Color> colorList;
+    private List<Image> imageList;
+    private Color stroke;
+    private int colorCount;
 
     /**
      * constructor.
@@ -38,6 +43,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
         hits = "2";
         this.hitListeners = new ArrayList<HitListener>();
         this.numOfHits = 2;
+        this.colorCount = 0;
     }
 
     /**
@@ -53,13 +59,15 @@ public class Block implements Collidable, Sprite, HitNotifier {
         hits = "2";
         this.hitListeners = new ArrayList<HitListener>();
         this.numOfHits = 2;
+        this.colorCount = 0;
     }
 
     /**
      * constructor.
      *
-     * @param rec .
-     * @param c   .
+     * @param rec          .
+     * @param c            .
+     * @param numberOfHits .
      */
     public Block(Rectangle rec, Color c, int numberOfHits) {
         this.rectangle = rec;
@@ -67,7 +75,20 @@ public class Block implements Collidable, Sprite, HitNotifier {
         hits = Integer.toString(numberOfHits);
         this.hitListeners = new ArrayList<HitListener>();
         this.numOfHits = numberOfHits;
+        this.colorCount = 0;
     }
+
+    public Block(Rectangle rec, int numberOfHits, List<Color> listOfColor, List<Image> listOfImages,
+                 Color strokeColor) {
+        this.rectangle = rec;
+        this.numOfHits = numberOfHits;
+        this.colorList = listOfColor;
+        this.imageList = listOfImages;
+        this.stroke = strokeColor;
+        this.colorCount = 0;
+        this.hitListeners = new ArrayList<HitListener>();
+    }
+
 
     /**
      * constructor for death region .
@@ -111,7 +132,8 @@ public class Block implements Collidable, Sprite, HitNotifier {
         double cY = collisionPoint.getY();
         setNumOfHits((this.numOfHits) - 1);
         this.notifyHit(hitter);
-        setHits(this.getHits());
+        //setHits(this.getHits());
+        changeColor();
         if ((Math.round(cX) == Math.round(this.rectangle.getLowerLeft().getX())
                 && Math.round(cY) == Math.round(this.rectangle.getLowerLeft().getY()))
                 || (Math.round(cX) == Math.round(this.rectangle.getLowerRight().getX())
@@ -153,6 +175,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     /**
      * setter.
+     *
      * @param num .
      */
     public void setNumOfHits(int num) {
@@ -165,10 +188,23 @@ public class Block implements Collidable, Sprite, HitNotifier {
      * @param surface .
      */
     public void drawOn(DrawSurface surface) {
-        surface.setColor(this.color);
+        if (this.colorList != null) {
+            surface.setColor(this.colorList.get(colorCount));
+        } else if (this.imageList != null) {
+            surface.drawImage((int)this.rectangle.getUpperLeft().getX(),(int)this.rectangle.getUpperLeft().getY(),
+                    this.imageList.get(colorCount));
+        } else {
+            surface.setColor(this.color);
+        }
+
         surface.fillRectangle((int) this.rectangle.getUpperLeft().getX(), (int) this.rectangle.getUpperLeft().getY(),
                 (int) this.rectangle.getWidth(), (int) this.rectangle.getHeight());
-        surface.setColor(Color.black);
+        if (stroke != null) {
+            surface.setColor(this.stroke);
+        } else {
+            surface.setColor(Color.black);
+        }
+
         surface.drawRectangle((int) this.rectangle.getUpperLeft().getX(), (int) this.rectangle.getUpperLeft().getY(),
                 (int) this.rectangle.getWidth(), (int) this.rectangle.getHeight());
         surface.setColor(Color.WHITE);
@@ -250,5 +286,27 @@ public class Block implements Collidable, Sprite, HitNotifier {
      */
     public int getNumOfHits() {
         return this.numOfHits;
+    }
+
+
+    public int getWidth() {
+        return (int) this.rectangle.getWidth();
+    }
+
+    public int getHeight() {
+        return (int) this.rectangle.getHeight();
+    }
+
+    public void changeColor() {
+        if (this.imageList != null) {
+            if (this.colorCount + 1 < imageList.size()) {
+                this.colorCount++;
+            }
+        } else if (colorList != null) {
+            if (this.colorCount + 1 < colorList.size()) {
+                this.colorCount++;
+            }
+
+        }
     }
 }

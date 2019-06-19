@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 /**
  * Green3 Level.
  *
@@ -24,8 +25,8 @@ public class Green3Level implements LevelInformation {
     }
 
     /**
-     * The initial velocity of each ball
-     * Note that initialBallVelocities().size() == numberOfBalls()
+     * The initial velocity of each ball .
+     * Note that initialBallVelocities().size() == numberOfBalls().
      *
      * @return List.
      */
@@ -58,7 +59,7 @@ public class Green3Level implements LevelInformation {
     }
 
     /**
-     * Returns a sprite with the background of the level
+     * Returns a sprite with the background of the level.
      *
      * @return Sprite
      */
@@ -111,7 +112,7 @@ public class Green3Level implements LevelInformation {
                 Point blockUpperLeft = new Point(800 - 90 - j * 40, upperLeft.getY());
                 Block tempBlock;
                 if (i == 0) {
-                    tempBlock = new Block(new geometry.Rectangle(blockUpperLeft, width, height),color,2);
+                    tempBlock = new Block(new geometry.Rectangle(blockUpperLeft, width, height), color, 2);
                     blocks.add(tempBlock);
                 } else {
                     tempBlock = new Block(new Rectangle(blockUpperLeft, width, height), color, 1);
@@ -138,10 +139,10 @@ public class Green3Level implements LevelInformation {
     }
 
     @Override
-    public List<Point> LocaitonOfBall() {
+    public List<Point> ballLocation() {
         List<Point> points = new ArrayList<Point>();
-        points.add(new Point(400,400));
-        points.add(new Point(200,400));
+        points.add(new Point(400, 400));
+        points.add(new Point(200, 400));
         return points;
     }
 }

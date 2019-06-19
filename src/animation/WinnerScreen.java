@@ -1,18 +1,27 @@
 package animation;
 
 import biuoop.DrawSurface;
-import biuoop.KeyboardSensor;
 import counter.Counter;
 
-import java.awt.*;
+import java.awt.Color;
 
+/**
+ * Winner Screen class.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class WinnerScreen implements Animation {
 
 
     private boolean stop;
     private Counter score;
 
-
+    /**
+     * Constructor.
+     *
+     * @param myScore .
+     */
     public WinnerScreen(Counter myScore) {
 
         this.stop = false;
@@ -20,11 +29,10 @@ public class WinnerScreen implements Animation {
     }
 
 
-
     /**
      * this function runs one frame each time it is called.
      *
-     * @param d
+     * @param d .
      */
     @Override
     public void doOneFrame(DrawSurface d) {

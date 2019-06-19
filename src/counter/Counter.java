@@ -47,7 +47,11 @@ public class Counter {
         return this.count;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    /**
+     * Count setter.
+     * @param count1 .
+     */
+    public void setCount(int count1) {
+        this.count = count1;
     }
 }

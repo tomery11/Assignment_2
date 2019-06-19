@@ -25,8 +25,8 @@ public class WideEasyLevel implements LevelInformation {
     }
 
     /**
-     * The initial velocity of each ball
-     * Note that initialBallVelocities().size() == numberOfBalls()
+     * The initial velocity of each ball.
+     * Note that initialBallVelocities().size() == numberOfBalls().
      *
      * @return List.
      */
@@ -62,7 +62,7 @@ public class WideEasyLevel implements LevelInformation {
     }
 
     /**
-     * Returns a sprite with the background of the level
+     * Returns a sprite with the background of the level.
      *
      * @return Sprite
      */
@@ -72,7 +72,7 @@ public class WideEasyLevel implements LevelInformation {
     }
 
     /**
-     * The Blocks that make up this level, each block contains
+     * The Blocks that make up this level, each block contains.
      * its size, color and location.
      *
      * @return List.
@@ -151,11 +151,11 @@ public class WideEasyLevel implements LevelInformation {
     }
 
     @Override
-    public List<Point> LocaitonOfBall() {
+    public List<Point> ballLocation() {
         List<Point> points = new ArrayList<Point>();
-        for (int i = 0; i < this.numberOfBalls() / 2; i++){
-            points.add(new Point(100 + 60 * i,400 - 20 * i));
-            points.add(new Point(700 - 60 * i,400 - 20 * i));
+        for (int i = 0; i < this.numberOfBalls() / 2; i++) {
+            points.add(new Point(100 + 60 * i, 400 - 20 * i));
+            points.add(new Point(700 - 60 * i, 400 - 20 * i));
         }
 
 

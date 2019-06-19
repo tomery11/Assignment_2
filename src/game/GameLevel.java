@@ -1,7 +1,11 @@
 package game;
 
 
-import animation.*;
+import animation.Animation;
+import animation.AnimationRunner;
+import animation.KeyPressStoppableAnimation;
+import animation.PauseScreen;
+import animation.CountdownAnimation;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import collision.Collidable;
@@ -56,6 +60,7 @@ public class GameLevel implements Animation {
 
     /**
      * Constructor of GameLevel.
+     * @param myLevel .
      */
     public GameLevel(LevelInformation myLevel) {
         this.currentLevel = myLevel;
@@ -198,7 +203,7 @@ public class GameLevel implements Animation {
     }
 
     /**
-     * this function is called in playoneturn and and adds the balls over the paddle
+     * this function is called in playoneturn and and adds the balls over the paddle.
      */
     public void createBallsOnTopOfPaddle() {
 
@@ -206,7 +211,7 @@ public class GameLevel implements Animation {
         Ball[] myBalls = new Ball[this.currentLevel.numberOfBalls()];
 
         for (int i = 0; i < myBalls.length; i++) {
-            myBalls[i] = new Ball(this.currentLevel.LocaitonOfBall().get(i), 5, Color.WHITE, frame, this.environment,
+            myBalls[i] = new Ball(this.currentLevel.ballLocation().get(i), 5, Color.WHITE, frame, this.environment,
                     this.currentLevel.initialBallVelocities().get(i));
             this.sprites.addSprite(myBalls[i]);
 

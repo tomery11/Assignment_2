@@ -11,6 +11,7 @@ import sprite.Sprite;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * DirectHit Level.
  *
@@ -24,8 +25,8 @@ public class DirectHit implements LevelInformation {
     }
 
     /**
-     * The initial velocity of each ball
-     * Note that initialBallVelocities().size() == numberOfBalls()
+     * The initial velocity of each ball.
+     * Note that initialBallVelocities().size() == numberOfBalls().
      *
      * @return List.
      */
@@ -57,7 +58,7 @@ public class DirectHit implements LevelInformation {
     }
 
     /**
-     * Returns a sprite with the background of the level
+     * Returns a sprite with the background of the level .
      *
      * @return Sprite
      */
@@ -96,9 +97,9 @@ public class DirectHit implements LevelInformation {
     }
 
     @Override
-    public List<Point> LocaitonOfBall() {
+    public List<Point> ballLocation() {
         List<Point> points = new ArrayList<Point>();
-        points.add(new Point(400,400));
+        points.add(new Point(400, 400));
         return points;
     }
 }

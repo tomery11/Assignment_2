@@ -13,14 +13,14 @@ public interface Animation {
     /**
      * this function runs one frame each time it is called.
      *
-     * @param d
+     * @param d .
      */
-    public void doOneFrame(DrawSurface d);
+    void doOneFrame(DrawSurface d);
 
     /**
      * this is a method that tell when to get out of the while loop in the play one turn method .
      *
      * @return boolean.
      */
-    public boolean shouldStop();
+    boolean shouldStop();
 }

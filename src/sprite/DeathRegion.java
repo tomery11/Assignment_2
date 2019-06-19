@@ -5,6 +5,7 @@ import geometry.Point;
 import geometry.Rectangle;
 
 import java.awt.Color;
+
 /**
  * Class DeathReigon describes where ball hits it disapears.
  *
@@ -39,14 +40,15 @@ public class DeathRegion extends Block {
      * @param c   .
      */
     public DeathRegion(Rectangle rec, Color c) {
-        super(rec, c,0);
+        super(rec, c, 0);
 
     }
 
     /**
      * constructor.
-     * @param rec .
-     * @param c .
+     *
+     * @param rec  .
+     * @param c    .
      * @param hits .
      */
     public DeathRegion(Rectangle rec, Color c, String hits) {

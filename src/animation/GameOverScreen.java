@@ -5,14 +5,22 @@ import biuoop.DrawSurface;
 import counter.Counter;
 
 import java.awt.Color;
-
+/**
+ * Game over animation.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class GameOverScreen implements Animation {
 
 
     private boolean stop;
     private Counter score;
 
-
+    /**
+     * Constructor.
+     * @param myScore .
+     */
     public GameOverScreen(Counter myScore) {
 
         this.stop = false;
@@ -23,7 +31,7 @@ public class GameOverScreen implements Animation {
     /**
      * this function runs one frame each time it is called.
      *
-     * @param d
+     * @param d .
      */
     @Override
     public void doOneFrame(DrawSurface d) {

@@ -1,7 +1,7 @@
 package animation;
 
 import biuoop.DrawSurface;
-import biuoop.KeyboardSensor;
+
 
 
 
@@ -27,7 +27,7 @@ public class PauseScreen implements Animation {
     /**
      * this function runs one frame each time it is called.
      *
-     * @param d
+     * @param d .
      */
     @Override
     public void doOneFrame(DrawSurface d) {

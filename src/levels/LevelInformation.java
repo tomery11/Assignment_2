@@ -6,6 +6,7 @@ import sprite.Block;
 import sprite.Sprite;
 
 import java.util.List;
+
 /**
  * level info interface.
  *
@@ -13,21 +14,34 @@ import java.util.List;
  * @version 1.2 4 Apr 2019
  */
 public interface LevelInformation {
-
-    public int numberOfBalls();
+    /**
+     * number of balls.
+     * @return number of balls.
+     */
+    int numberOfBalls();
 
 
     /**
-     * The initial velocity of each ball
-     * Note that initialBallVelocities().size() == numberOfBalls()
+     * The initial velocity of each ball.
+     * Note that initialBallVelocities().size() == numberOfBalls().
      *
      * @return List.
      */
-    public List<Velocity> initialBallVelocities();
+    List<Velocity> initialBallVelocities();
 
-    public int paddleSpeed();
+    /**
+     * paddle speed.
+     *
+     * @return int .
+     */
+    int paddleSpeed();
 
-    public int paddleWidth();
+    /**
+     * paddle width.
+     *
+     * @return int .
+     */
+    int paddleWidth();
 
 
     /**
@@ -35,15 +49,15 @@ public interface LevelInformation {
      *
      * @return String
      */
-    public String levelName();
+    String levelName();
 
 
     /**
-     * Returns a sprite with the background of the level
+     * Returns a sprite with the background of the level.
      *
      * @return Sprite
      */
-    public Sprite getBackground();
+    Sprite getBackground();
 
 
     /**
@@ -52,7 +66,7 @@ public interface LevelInformation {
      *
      * @return List.
      */
-    public List<Block> blocks();
+    List<Block> blocks();
 
 
     /**
@@ -62,8 +76,11 @@ public interface LevelInformation {
      *
      * @return int .
      */
-    public int numberOfBlocksToRemove();
+    int numberOfBlocksToRemove();
 
-
-    public List<Point> LocaitonOfBall();
+    /**
+     * returns the location of the ball.
+     * @return List.
+     */
+    List<Point> ballLocation();
 }

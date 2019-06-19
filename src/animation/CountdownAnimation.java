@@ -23,7 +23,13 @@ public class CountdownAnimation implements Animation {
     private Sleeper sleeper;
     private long time;
 
-
+    /**
+     * Constructor.
+     *
+     * @param numOfSeconds .
+     * @param countFrom    .
+     * @param gameScreen   .
+     */
     public CountdownAnimation(double numOfSeconds,
                               int countFrom,
                               SpriteCollection gameScreen) {
@@ -38,7 +44,7 @@ public class CountdownAnimation implements Animation {
     /**
      * this function runs one frame each time it is called.
      *
-     * @param d
+     * @param d .
      */
     @Override
     public void doOneFrame(DrawSurface d) {

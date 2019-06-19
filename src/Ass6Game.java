@@ -1,9 +1,16 @@
 import animation.AnimationRunner;
 import game.GameFlow;
-import game.GameLevel;
-import geometry.Point;
-import levels.*;
 
+import game.HighScoresTable;
+import levels.LevelInformation;
+
+import levels.FinalFour;
+import levels.Green3Level;
+import levels.WideEasyLevel;
+import levels.DirectHit;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +27,7 @@ public class Ass6Game {
      *
      * @param args .
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         List<LevelInformation> levelList = new ArrayList<LevelInformation>();
         int length = args.length;
         for (int i = 0; i < length; i++) {
@@ -30,8 +37,27 @@ public class Ass6Game {
             }
 
         }
+        if (length == 0) {
+            for (int i = 1; i < 5; i++) {
+
+                addToLevelList(levelList, i);
+            }
+        }
         AnimationRunner myAR = new AnimationRunner();
-        GameFlow myGameFlow = new GameFlow(myAR, myAR.getGui().getKeyboardSensor());
+        /*
+        File highScoreFile = new File("highscores.txt");
+        HighScoresTable scoresTable = new HighScoresTable(5);
+        scoresTable.save(highScoreFile);
+        HighScoresTable highScoreTable = HighScoresTable.loadFromFile(highScoreFile);
+        */
+        HighScoresTable scoresTable;
+        File file = new File("highscores.txt");
+        if(file.exists()) {
+            scoresTable = HighScoresTable.loadFromFile(file);
+        } else {
+            scoresTable = new HighScoresTable(5);
+        }
+        GameFlow myGameFlow = new GameFlow(myAR, myAR.getGui().getKeyboardSensor(),scoresTable);
         myGameFlow.runLevels(levelList);
 
 
@@ -51,6 +77,12 @@ public class Ass6Game {
 
     }
 
+    /**
+     * converts level number and adds it to the levelList.
+     *
+     * @param levelList .
+     * @param level     .
+     */
     private static void addToLevelList(List<LevelInformation> levelList, int level) {
         switch (level) {
 
