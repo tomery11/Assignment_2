@@ -30,7 +30,7 @@ public class FrameBoundary implements Sprite, Collidable, HitNotifier {
      * constructor.
      *
      * @param frameRectangle .
-     * @param isDeathRegion .
+     * @param isDeathRegion  .
      */
     public FrameBoundary(Rectangle frameRectangle, boolean isDeathRegion) {
         this.frameRec = frameRectangle;
@@ -43,8 +43,9 @@ public class FrameBoundary implements Sprite, Collidable, HitNotifier {
 
     /**
      * Constructor.
-     * @param frameRectangle .
-     * @param isDeathRegion .
+     *
+     * @param frameRectangle   .
+     * @param isDeathRegion    .
      * @param isScoreIndicator .
      */
     public FrameBoundary(Rectangle frameRectangle, boolean isDeathRegion, boolean isScoreIndicator) {

@@ -4,7 +4,7 @@ import background.ColorParser;
 
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -17,9 +17,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * BlocksDefinitionReader.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class BlocksDefinitionReader {
-    public static Path path = null;
+    private static Path path = null;
 
+    /**
+     * parses the file.
+     *
+     * @param reader .
+     * @return BlocksFromSymbolsFactory .
+     * @throws IOException .
+     */
     public static BlocksFromSymbolsFactory fromReader(java.io.Reader reader) throws IOException {
         List<String> lines = Files.readAllLines(BlocksDefinitionReader.path);
         HashMap<String, String> defaultMap = null;
@@ -28,7 +41,7 @@ public class BlocksDefinitionReader {
         List<HashMap<String, String>> bdefMapList = new ArrayList<>();
         List<HashMap<String, String>> sdefMapList = new ArrayList<>();
         for (String str : lines) {
-            if (str.equals(null)){
+            if (str.equals(null)) {
                 continue;
             }
             if (str.contains("default") && !str.contains("#")) {
@@ -75,9 +88,9 @@ public class BlocksDefinitionReader {
             if (bdef.containsKey("stroke")) {
                 stroke = ColorParser.colorFromString(bdef.get("stroke"));
             } else {
-                if (defaultMap != null){
+                if (defaultMap != null) {
                     stroke = ColorParser.colorFromString(defaultMap.get("stroke"));
-                }else {
+                } else {
                     stroke = Color.black;
                 }
 
@@ -118,39 +131,44 @@ public class BlocksDefinitionReader {
             BlockCreator blockCreatorToMap;
             List<Image> imageList = new ArrayList<>();
             List<Color> colorList = new ArrayList<>();
-            if (fillList.get(0).contains("image")){
-                for (String str : fillList){
-                    str = str.substring(6,str.length() - 1);
+            if (fillList.get(0).contains("image")) {
+                for (String str : fillList) {
+                    str = str.substring(6, str.length() - 1);
                     BufferedImage img = null;
                     try {
                         img = ImageIO.read(new File(str));
-                    } catch (IOException e) {
+                    } catch (IOException er) {
+                        throw new IOException("file is not");
                     }
                     imageList.add(img);
                 }
-                blockCreatorToMap = new BlockFactoryImage(hitPoint, width, height,imageList,stroke);
+                blockCreatorToMap = new BlockFactoryImage(hitPoint, width, height, imageList, stroke);
             } else {
-                for (String str : fillList){
-                    str = str.substring(6,str.length() - 1);
+                for (String str : fillList) {
+                    str = str.substring(6, str.length() - 1);
                     colorList.add(ColorParser.colorFromString(str));
                 }
-                blockCreatorToMap = new BlockFactoryColor(hitPoint, width, height,colorList,stroke);
+                blockCreatorToMap = new BlockFactoryColor(hitPoint, width, height, colorList, stroke);
             }
 
-            blockCreators.put(key,blockCreatorToMap);
+            blockCreators.put(key, blockCreatorToMap);
         }
 
 
-
-        BlocksFromSymbolsFactory toReturn = new BlocksFromSymbolsFactory(spacerWidths,blockCreators);
+        BlocksFromSymbolsFactory toReturn = new BlocksFromSymbolsFactory(spacerWidths, blockCreators);
 
         return toReturn;
     }
 
+    /**
+     * converts to map.
+     *
+     * @param str .
+     * @return .
+     */
     private static HashMap<String, String> convertToMap(String str) {
         HashMap<String, String> toReturn = new HashMap<>();
 
-        //List<String> tempStringList = new ArrayList<>();
         String[] tokens = str.split(" ");
         for (String i : tokens) {
             String[] value = i.split(":");
@@ -158,5 +176,13 @@ public class BlocksDefinitionReader {
         }
 
         return toReturn;
+    }
+
+    /**
+     * setter.
+     * @param path1 .
+     */
+    public static void setPath(Path path1) {
+        BlocksDefinitionReader.path = path1;
     }
 }

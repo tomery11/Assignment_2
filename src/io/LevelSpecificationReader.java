@@ -24,16 +24,32 @@ import java.util.List;
 
 import static background.ColorParser.colorFromString;
 
-
+/**
+ * Parses the level spec text file.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class LevelSpecificationReader {
     private java.nio.file.Path path;
 
-
+    /**
+     * Constructor.
+     *
+     * @param myPath
+     */
     public LevelSpecificationReader(java.nio.file.Path myPath) {
         this.path = myPath;
 
     }
 
+    /**
+     * parses the file.
+     *
+     * @param reader .
+     * @return List<LevelInformation> .
+     * @throws IOException .
+     */
     public List<LevelInformation> fromReader(java.io.Reader reader) throws IOException {
         List<LevelInformation> levelList = new ArrayList<>();
         List<HashMap<String, String>> mapList = new ArrayList<>();
@@ -49,7 +65,7 @@ public class LevelSpecificationReader {
 
 
         for (String str : lines) {
-            if (str.equals("")){
+            if (str.equals("")) {
                 continue;
             }
             if (str.equals("START_LEVEL") || str.contains("# Level")) {
@@ -75,10 +91,10 @@ public class LevelSpecificationReader {
 
             }
             if (startBlockFlag) {
-                if (str.equals("END_BLOCKS")){
+                if (str.equals("END_BLOCKS")) {
                     startBlockFlag = false;
                     startBlockList.add(stringList);
-                }else{
+                } else {
                     stringList.add(str);
                 }
             }
@@ -97,7 +113,8 @@ public class LevelSpecificationReader {
             levelToAdd.setGetBackground(backgroundConverter(mapList.get(i).get("background")));
             levelToAdd.setPaddleSpeed(Integer.parseInt(mapList.get(i).get("paddle_speed")));
             levelToAdd.setPaddleWidth(Integer.parseInt(mapList.get(i).get("paddle_width")));
-            BlocksDefinitionReader.path = Paths.get(mapList.get(i).get("block_definitions"));
+            BlocksDefinitionReader.setPath(Paths.get(mapList.get(i).get("block_definitions")));
+            //BlocksDefinitionReader.path = Paths.get(mapList.get(i).get("block_definitions"));
             BlocksFromSymbolsFactory blocksFromSymbolsFactory = BlocksDefinitionReader.fromReader(reader);
             tempBlockList = startBlockList.get(i);
             int row_height = Integer.parseInt(mapList.get(i).get("row_height"));
@@ -105,7 +122,7 @@ public class LevelSpecificationReader {
             for (String str : tempBlockList) {
                 x = 30;
                 for (int j = 0; j < str.length(); j++) {
-                    String arg = ""+ str.charAt(j);
+                    String arg = "" + str.charAt(j);
                     if (blocksFromSymbolsFactory.isBlockSymbol(arg)) {
                         Block tmp = blocksFromSymbolsFactory.getBlock(arg, x, y);
                         blockList.add(tmp);
@@ -125,19 +142,23 @@ public class LevelSpecificationReader {
             levelToAdd.setNumberOfBlocksToRemove(blockList.size());
             levelToAdd.setNumberOfBalls(levelToAdd.initialBallVelocities().size());
             List<Point> ballLocation = new ArrayList<>();
-            ballLocation.add(new Point(400,400));
+            ballLocation.add(new Point(400, 400));
             levelToAdd.setBallLocation(ballLocation);
             levelList.add(levelToAdd);
 
         }
 
 
-
         return levelList;
 
     }
 
-
+    /**
+     * aux funciton parse the veloctiy.
+     *
+     * @param toParse .
+     * @return List.
+     */
     private List<Velocity> parseVelocity(String toParse) {
         List<Velocity> toReturn = new ArrayList<>();
         List<String> tempStringList = new ArrayList<>();
@@ -154,6 +175,12 @@ public class LevelSpecificationReader {
         return toReturn;
     }
 
+    /**
+     * Converts the string to a background: color/image.
+     *
+     * @param toConvert .
+     * @return Sprite .
+     */
     private Sprite backgroundConverter(String toConvert) {
         int index = toConvert.indexOf('(');
         Background toReturn;

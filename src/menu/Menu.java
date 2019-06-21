@@ -2,11 +2,17 @@ package menu;
 
 import animation.Animation;
 
+/**
+ * Menu interface.
+ *
+ * @param <T> .
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public interface Menu<T> extends Animation {
     /**
-     *
-     * @param key String.
-     * @param message String.
+     * @param key       String.
+     * @param message   String.
      * @param returnVal T .
      */
     void addSelection(String key, String message, T returnVal);
@@ -18,7 +24,8 @@ public interface Menu<T> extends Animation {
 
     /**
      * Creates a sub-menu.
-     * @param key .
+     *
+     * @param key     .
      * @param message .
      * @param subMenu .
      */

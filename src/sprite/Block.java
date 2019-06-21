@@ -78,6 +78,15 @@ public class Block implements Collidable, Sprite, HitNotifier {
         this.colorCount = 0;
     }
 
+    /**
+     * Constructor.
+     *
+     * @param rec          .
+     * @param numberOfHits .
+     * @param listOfColor  .
+     * @param listOfImages .
+     * @param strokeColor  .
+     */
     public Block(Rectangle rec, int numberOfHits, List<Color> listOfColor, List<Image> listOfImages,
                  Color strokeColor) {
         this.rectangle = rec;
@@ -190,14 +199,16 @@ public class Block implements Collidable, Sprite, HitNotifier {
     public void drawOn(DrawSurface surface) {
         if (this.colorList != null) {
             surface.setColor(this.colorList.get(colorCount));
-            surface.fillRectangle((int) this.rectangle.getUpperLeft().getX(), (int) this.rectangle.getUpperLeft().getY(),
+            surface.fillRectangle((int) this.rectangle.getUpperLeft().getX(),
+                    (int) this.rectangle.getUpperLeft().getY(),
                     (int) this.rectangle.getWidth(), (int) this.rectangle.getHeight());
         } else if (this.imageList != null) {
-            surface.drawImage((int)this.rectangle.getUpperLeft().getX(),(int)this.rectangle.getUpperLeft().getY(),
+            surface.drawImage((int) this.rectangle.getUpperLeft().getX(), (int) this.rectangle.getUpperLeft().getY(),
                     this.imageList.get(colorCount));
         } else {
             surface.setColor(this.color);
-            surface.fillRectangle((int) this.rectangle.getUpperLeft().getX(), (int) this.rectangle.getUpperLeft().getY(),
+            surface.fillRectangle((int) this.rectangle.getUpperLeft().getX(),
+                    (int) this.rectangle.getUpperLeft().getY(),
                     (int) this.rectangle.getWidth(), (int) this.rectangle.getHeight());
         }
 
@@ -211,13 +222,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
         surface.drawRectangle((int) this.rectangle.getUpperLeft().getX(), (int) this.rectangle.getUpperLeft().getY(),
                 (int) this.rectangle.getWidth(), (int) this.rectangle.getHeight());
         surface.setColor(Color.WHITE);
-        // here we will draw the number of hits on the blocks
-        /*
-        surface.drawText((int) this.rectangle.getUpperLeft().getX()
-                        + (int) (0.5 * this.rectangle.getWidth()),
-                (int) this.rectangle.getUpperLeft().getY() + (int) (0.5 * this.rectangle.getHeight()),
-                getHits(), 20);
-                */
+
     }
 
     @Override
@@ -291,15 +296,27 @@ public class Block implements Collidable, Sprite, HitNotifier {
         return this.numOfHits;
     }
 
-
+    /**
+     * getter.
+     *
+     * @return int/
+     */
     public int getWidth() {
         return (int) this.rectangle.getWidth();
     }
 
+    /**
+     * getter.
+     *
+     * @return int.
+     */
     public int getHeight() {
         return (int) this.rectangle.getHeight();
     }
 
+    /**
+     * updates color by updating counter of color count list.
+     */
     public void changeColor() {
         if (this.imageList != null) {
             if (this.colorCount + 1 < imageList.size()) {

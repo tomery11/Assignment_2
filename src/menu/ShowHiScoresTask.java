@@ -6,25 +6,35 @@ import animation.HighScoresAnimation;
 import animation.KeyPressStoppableAnimation;
 import biuoop.KeyboardSensor;
 
+/**
+ * ShowHiScoreTask.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class ShowHiScoresTask implements Task<Void> {
 
     private AnimationRunner runner;
     private Animation highScoresAnimation;
     private KeyboardSensor ks;
+
     /**
      * constructor.
-     * @param ar AnimationRunner
-     * @param highScoresAnimation Animation
-     * @param ks KeyboardSensor
+     *
+     * @param ar                  AnimationRunner .
+     * @param highScoresAnimation Animation .
+     * @param ks                  KeyboardSensor .
      */
     public ShowHiScoresTask(AnimationRunner ar, Animation highScoresAnimation, KeyboardSensor ks) {
         this.runner = ar;
         this.highScoresAnimation = (HighScoresAnimation) highScoresAnimation;
         this.ks = ks;
     }
+
     /**
      * run the animation.
-     * @return nothing
+     *
+     * @return nothing .
      */
     public Void run() {
         this.runner.run(new KeyPressStoppableAnimation(ks, KeyboardSensor.SPACE_KEY, this.highScoresAnimation));

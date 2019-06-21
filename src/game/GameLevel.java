@@ -60,6 +60,7 @@ public class GameLevel implements Animation {
 
     /**
      * Constructor of GameLevel.
+     *
      * @param myLevel .
      */
     public GameLevel(LevelInformation myLevel) {
@@ -83,10 +84,11 @@ public class GameLevel implements Animation {
 
     /**
      * constructor.
-     * @param levelInfo .
-     * @param ar .
-     * @param ks .
-     * @param lives .
+     *
+     * @param levelInfo  .
+     * @param ar         .
+     * @param ks         .
+     * @param lives      .
      * @param scoreBoard .
      */
     public GameLevel(LevelInformation levelInfo, AnimationRunner ar, KeyboardSensor ks,
@@ -270,10 +272,10 @@ public class GameLevel implements Animation {
         FrameBoundary fB1 = new FrameBoundary(new Rectangle(new Point(0, 20), width, 30),
                 false);
         //left frame
-        FrameBoundary fB2 = new FrameBoundary(new Rectangle(new Point(0, 50), 30, height - 10),
+        FrameBoundary fB2 = new FrameBoundary(new Rectangle(new Point(0, 50), 25, height - 10),
                 false);
         //right frame
-        FrameBoundary fB3 = new FrameBoundary(new Rectangle(new Point(width - 30, 50), 30,
+        FrameBoundary fB3 = new FrameBoundary(new Rectangle(new Point(width - 25, 50), 25,
                 height - 10), false);
 
         DeathRegion currDeathRegion = new DeathRegion(new Rectangle(new Point(0, height), width, 30),

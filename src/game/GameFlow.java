@@ -1,6 +1,11 @@
 package game;
 
-import animation.*;
+
+import animation.AnimationRunner;
+import animation.HighScoresAnimation;
+import animation.KeyPressStoppableAnimation;
+import animation.GameOverScreen;
+import animation.WinnerScreen;
 import biuoop.DialogManager;
 import biuoop.KeyboardSensor;
 
@@ -10,11 +15,21 @@ import geometry.Rectangle;
 import io.LevelSetReader;
 import io.LevelSpecificationReader;
 import levels.LevelInformation;
-import menu.*;
+import menu.SubMenuTask;
+import menu.Task;
+import menu.SelectOption;
+import menu.SubMenuAnimation;
+import menu.MenuAnimation;
+import menu.Menu;
+import menu.ShowHiScoresTask;
+import menu.StartTask;
+import menu.QuitTask;
+
+
 import sprite.ScoreIndicator;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -59,6 +74,12 @@ public class GameFlow {
 
     }
 
+    /**
+     * this function starts the menu.
+     *
+     * @param levelList .
+     * @param subMenu   .
+     */
     public void startMenu(List<LevelInformation> levelList, SubMenuAnimation<Task<Void>> subMenu) {
         List<SelectOption<Task<Void>>> allSelections = new ArrayList<SelectOption<Task<Void>>>();
         Menu<Task<Void>> menu = new MenuAnimation<Task<Void>>("Arkanoid", keyboardSensor, animationRunner);
@@ -69,13 +90,13 @@ public class GameFlow {
         menu.addSelection("h", "Press (H) for High scores", new ShowHiScoresTask(this.animationRunner,
                 new HighScoresAnimation(this.highScoresTable),
                 this.keyboardSensor));
-        menu.addSelection("q", "Press (Q) to Quit", new QuitTask(this.animationRunner));
+        menu.addSelection("e", "Press (E) to Exit", new QuitTask(this.animationRunner));
 
         while (true) {
             this.animationRunner.run(menu);
             Task<Void> task = menu.getStatus();
             task.run();
-            if (task instanceof SubMenuTask){
+            if (task instanceof SubMenuTask) {
                 Task<Void> task1 = subMenu.getStatus();
                 task1.run();
             }
@@ -85,7 +106,12 @@ public class GameFlow {
 
     }
 
-
+    /**
+     * this is the first thing that starts the game flow.
+     *
+     * @param path .
+     * @throws IOException .
+     */
     public void startGameFlow(String path) throws IOException {
 
         List<LevelInformation> levelList = new ArrayList<>();
@@ -93,29 +119,25 @@ public class GameFlow {
         LevelSetReader levelSetReader = new LevelSetReader(Paths.get(path));
         levelSetReader.fromReader(new FileReader(path));
 
-        SubMenuAnimation<Task<Void>> subMenu = new SubMenuAnimation<Task<Void>>("Arkanoid", keyboardSensor, animationRunner);
-        //SubMenuAnimation subMenu = new SubMenuAnimation("Choose Level",
-                //keyboardSensor, animationRunner);
+        SubMenuAnimation<Task<Void>> subMenu =
+                new SubMenuAnimation<Task<Void>>("Arkanoid", keyboardSensor, animationRunner);
         levelList = getLevelListToRun(path, subMenu);
 
 
-
-
-        LevelSpecificationReader levelSpecificationReader = new LevelSpecificationReader
-                (Paths.get("definitions/hard_level_definitions.txt"));
-        try {
-            levelList = levelSpecificationReader.fromReader(new FileReader("definitions/easy_level_definitions.txt"));
-            //levelList = levelSpecificationReader.fromReader(new FileReader("level_definition.txt"));
-        } catch (FileNotFoundException f) {
-            System.out.println("file not found");
-        } catch (IOException j) {
-            System.out.println("IO exception");
-        }
         this.startMenu(levelList, subMenu);
     }
 
-
-    private List<LevelInformation> getLevelListToRun(String path, SubMenuAnimation<Task<Void>> subMenu) throws IOException {
+    /**
+     * this function gets a path and and a submenu task, sends the file to LevelSetReader where there the file
+     * is parsed and we then use the levelSpecificationReader in order to create a level list.
+     *
+     * @param path    .
+     * @param subMenu .
+     * @return List<LevelInformation>
+     * @throws IOException .
+     */
+    private List<LevelInformation> getLevelListToRun(String path, SubMenuAnimation<Task<Void>> subMenu)
+            throws IOException {
         List<LevelSpecificationReader> levelSpecificationReaderList = new ArrayList<>();
         LevelSetReader levelSetReader = new LevelSetReader(Paths.get(path));
         levelSetReader.fromReader(new FileReader(path));
@@ -125,20 +147,20 @@ public class GameFlow {
         List<String> pathStringList = new ArrayList<>();
 
         for (Map.Entry<String, List<String>> entry : levelSetMap.entrySet()) {
-            levelSpecificationReaderList.add(new LevelSpecificationReader
-                    (Paths.get(entry.getValue().get(1))));
+            levelSpecificationReaderList.add(new LevelSpecificationReader(
+                    Paths.get(entry.getValue().get(1))));
 
-            keyStringList.add(entry.getKey()+"");
+            keyStringList.add(entry.getKey() + "");
             messageStringList.add("Press (" + entry.getKey() + ") for " + entry.getValue().get(0) + " Level");
             pathStringList.add(entry.getValue().get(1));
 
 
         }
         int i = 0;
-        for (LevelSpecificationReader lsr : levelSpecificationReaderList){
+        for (LevelSpecificationReader lsr : levelSpecificationReaderList) {
             subMenu.addSelection(keyStringList.get(i),
                     messageStringList.get(i)
-                    ,new StartTask(this,
+                    , new StartTask(this,
                             levelSpecificationReaderList.get(i).fromReader(new FileReader(pathStringList.get(i)))));
             i++;
         }
@@ -168,28 +190,22 @@ public class GameFlow {
             //no more lives
             if (this.numberOfLives.getValue() == 0) {
                 addToTable();
-                this.highScoresTable.printTable();
-
                 this.animationRunner.run(new KeyPressStoppableAnimation(this.keyboardSensor, "space",
                         new GameOverScreen(currScore)));
-
 
                 break;
             }
             if (i == levels.size() && level.getBlockCounter().getValue() == 0) {
+                addToTable();
                 this.animationRunner.run(new KeyPressStoppableAnimation(this.keyboardSensor, "space",
                         new WinnerScreen(currScore)));
 
-                addToTable();
-                this.highScoresTable.printTable();
                 break;
             }
-
-
         }
-
         this.animationRunner.run(new KeyPressStoppableAnimation(this.keyboardSensor, "space",
                 new HighScoresAnimation(highScoresTable)));
+
 
     }
 
@@ -215,5 +231,30 @@ public class GameFlow {
 
     }
 
+    /**
+     * setter .
+     *
+     * @param numberOfLives1 .
+     */
+    public void setNumberOfLives(Counter numberOfLives1) {
+        this.numberOfLives = numberOfLives1;
+    }
 
+    /**
+     * setter .
+     *
+     * @param scoreBoard1 .
+     */
+    public void setScoreBoard(ScoreIndicator scoreBoard1) {
+        this.scoreBoard = scoreBoard1;
+    }
+
+    /**
+     * getter .
+     *
+     * @return Counter .
+     */
+    public Counter getNumberOfLives() {
+        return numberOfLives;
+    }
 }

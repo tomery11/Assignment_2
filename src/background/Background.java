@@ -3,7 +3,8 @@ package background;
 import biuoop.DrawSurface;
 import sprite.Sprite;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Image;
 
 /**
  * Background class.
@@ -27,7 +28,8 @@ public class Background implements Sprite {
 
     /**
      * contructor for image.
-     * @param myImage
+     *
+     * @param myImage .
      */
     public Background(Image myImage) {
         this.image = myImage;
@@ -46,7 +48,7 @@ public class Background implements Sprite {
             d.fillRectangle(0, 0, 800, 600);
         }
         if (this.image != null) {
-            d.drawImage(0,0, this.image);
+            d.drawImage(0, 0, this.image);
         }
     }
 
@@ -60,6 +62,7 @@ public class Background implements Sprite {
 
     /**
      * getter for color background.
+     *
      * @return Color.
      */
     public Color getColor() {

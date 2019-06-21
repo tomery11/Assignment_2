@@ -4,10 +4,17 @@ import animation.AnimationRunner;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Sub Menu Animation.
+ *
+ * @param <T> .
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class SubMenuAnimation<T> implements Menu<T> {
     private String menuTitle;
     private KeyboardSensor keyboardSensor;
@@ -16,6 +23,13 @@ public class SubMenuAnimation<T> implements Menu<T> {
     private T status;
     private List<SelectOption<T>> option;
 
+    /**
+     * Constructor.
+     *
+     * @param menuTitle1 .
+     * @param ks         .
+     * @param ar         .
+     */
     public SubMenuAnimation(String menuTitle1, KeyboardSensor ks, AnimationRunner ar) {
         this.menuTitle = menuTitle1;
         this.keyboardSensor = ks;
@@ -36,7 +50,7 @@ public class SubMenuAnimation<T> implements Menu<T> {
     }
 
     /**
-     * @return status
+     * @return status .
      */
     @Override
     public T getStatus() {

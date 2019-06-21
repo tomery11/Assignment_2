@@ -6,8 +6,13 @@ import sprite.Block;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.List;
-
-public class BlockFactoryImage implements BlockCreator{
+/**
+ * BlockCreator Factory.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
+public class BlockFactoryImage implements BlockCreator {
 
     private int hitPoint;
     private int width;
@@ -15,6 +20,14 @@ public class BlockFactoryImage implements BlockCreator{
     private List<Image> imageList;
     private Color stroke;
 
+    /**
+     * Constructor.
+     * @param hitPoint1 .
+     * @param width1 .
+     * @param height1 .
+     * @param imageList1 .
+     * @param stroke1 .
+     */
     public BlockFactoryImage(int hitPoint1, int width1, int height1, List<Image> imageList1, Color stroke1) {
         this.hitPoint = hitPoint1;
         this.width = width1;

@@ -16,6 +16,7 @@ import java.util.List;
 public interface LevelInformation {
     /**
      * number of balls.
+     *
      * @return number of balls.
      */
     int numberOfBalls();
@@ -80,6 +81,7 @@ public interface LevelInformation {
 
     /**
      * returns the location of the ball.
+     *
      * @return List.
      */
     List<Point> ballLocation();

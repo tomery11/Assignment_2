@@ -9,6 +9,12 @@ import sprite.Sprite;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Level info for ass7.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class LevelInfo7 implements LevelInformation {
     private int numberOfBalls;
     private List<Velocity> initialBallVelocity;
@@ -31,6 +37,11 @@ public class LevelInfo7 implements LevelInformation {
         return this.numberOfBalls;
     }
 
+    /**
+     * Setter.
+     *
+     * @param numberOfBalls .
+     */
     public void setNumberOfBalls(int numberOfBalls) {
         this.numberOfBalls = numberOfBalls;
     }
@@ -46,6 +57,11 @@ public class LevelInfo7 implements LevelInformation {
         return this.initialBallVelocity;
     }
 
+    /**
+     * Setter.
+     *
+     * @param initialBallVelocity .
+     */
     public void setInitialBallVelocity(List<Velocity> initialBallVelocity) {
         this.initialBallVelocity = initialBallVelocity;
     }
@@ -60,6 +76,11 @@ public class LevelInfo7 implements LevelInformation {
         return this.paddleSpeed;
     }
 
+    /**
+     * Setter.
+     *
+     * @param paddleSpeed .
+     */
     public void setPaddleSpeed(int paddleSpeed) {
         this.paddleSpeed = paddleSpeed;
     }
@@ -74,6 +95,11 @@ public class LevelInfo7 implements LevelInformation {
         return this.paddleWidth;
     }
 
+    /**
+     * Setter.
+     *
+     * @param paddleWidth .
+     */
     public void setPaddleWidth(int paddleWidth) {
         this.paddleWidth = paddleWidth;
     }
@@ -88,6 +114,11 @@ public class LevelInfo7 implements LevelInformation {
         return this.levelName;
     }
 
+    /**
+     * Setter.
+     *
+     * @param levelName .
+     */
     public void setLevelName(String levelName) {
         this.levelName = levelName;
     }
@@ -102,7 +133,11 @@ public class LevelInfo7 implements LevelInformation {
         return this.getBackground;
     }
 
-
+    /**
+     * Setter.
+     *
+     * @param getBackground .
+     */
     public void setGetBackground(Sprite getBackground) {
         this.getBackground = getBackground;
     }
@@ -118,6 +153,11 @@ public class LevelInfo7 implements LevelInformation {
         return this.blocks;
     }
 
+    /**
+     * Setter.
+     *
+     * @param blocks .
+     */
     public void setBlocks(List<Block> blocks) {
         this.blocks = blocks;
     }
@@ -134,6 +174,11 @@ public class LevelInfo7 implements LevelInformation {
         return this.numberOfBlocksToRemove;
     }
 
+    /**
+     * Setter.
+     *
+     * @param numberOfBlocksToRemove .
+     */
     public void setNumberOfBlocksToRemove(int numberOfBlocksToRemove) {
         this.numberOfBlocksToRemove = numberOfBlocksToRemove;
     }
@@ -157,6 +202,11 @@ public class LevelInfo7 implements LevelInformation {
         return locationList;
     }
 
+    /**
+     * Setter.
+     *
+     * @param ballLocation .
+     */
     public void setBallLocation(List<Point> ballLocation) {
         this.ballLocation = ballLocation;
     }

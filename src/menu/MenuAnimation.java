@@ -9,6 +9,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * MenuAnimation.
+ *
+ * @param <T> .
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class MenuAnimation<T> implements Menu<T> {
 
 
@@ -18,9 +25,15 @@ public class MenuAnimation<T> implements Menu<T> {
     private boolean stop;
     private T status;
     private List<SelectOption<T>> option;
-    //private boolean bool;
 
 
+    /**
+     * Constructor.
+     *
+     * @param menuTitle1 .
+     * @param ks         .
+     * @param ar         .
+     */
     public MenuAnimation(String menuTitle1, KeyboardSensor ks, AnimationRunner ar) {
         this.menuTitle = menuTitle1;
         this.keyboardSensor = ks;
@@ -98,7 +111,12 @@ public class MenuAnimation<T> implements Menu<T> {
         return this.stop;
     }
 
-    public void setStop(boolean stop) {
-        this.stop = stop;
+    /**
+     * setter.
+     *
+     * @param stop1 .
+     */
+    public void setStop(boolean stop1) {
+        this.stop = stop1;
     }
 }

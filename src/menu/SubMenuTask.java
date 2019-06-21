@@ -3,23 +3,28 @@ package menu;
 import animation.Animation;
 import animation.AnimationRunner;
 import biuoop.KeyboardSensor;
-import game.GameFlow;
-import levels.LevelInformation;
 
-import java.util.List;
-
+/**
+ * Sub menu Task.
+ *
+ * @author Tomer Yona
+ * @version 1.2 4 Apr 2019
+ */
 public class SubMenuTask implements Task<Void> {
 
-    //private GameFlow game;
-    //private List<LevelInformation> levels;
     private Animation subMenuAnimation;
     private KeyboardSensor keyboardSensors;
     private AnimationRunner runner;
 
+    /**
+     * Constructor.
+     *
+     * @param mySubMenuAnimation .
+     * @param ar                 .
+     * @param ks                 .
+     */
+    public SubMenuTask(Animation mySubMenuAnimation, AnimationRunner ar, KeyboardSensor ks) {
 
-    public SubMenuTask(Animation mySubMenuAnimation, AnimationRunner ar, KeyboardSensor ks){
-        //this.game = myGame;
-        //this.levels = list;
         this.subMenuAnimation = (SubMenuAnimation) mySubMenuAnimation;
         this.keyboardSensors = ks;
         this.runner = ar;
