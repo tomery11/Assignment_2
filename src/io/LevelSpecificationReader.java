@@ -52,7 +52,7 @@ public class LevelSpecificationReader {
             if (str.equals("")){
                 continue;
             }
-            if (str.equals("START_LEVEL")) {
+            if (str.equals("START_LEVEL") || str.contains("# Level")) {
                 mapToAdd = new HashMap<>();
             }
             if (str.contains(":")) {

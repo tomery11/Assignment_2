@@ -190,15 +190,18 @@ public class Block implements Collidable, Sprite, HitNotifier {
     public void drawOn(DrawSurface surface) {
         if (this.colorList != null) {
             surface.setColor(this.colorList.get(colorCount));
+            surface.fillRectangle((int) this.rectangle.getUpperLeft().getX(), (int) this.rectangle.getUpperLeft().getY(),
+                    (int) this.rectangle.getWidth(), (int) this.rectangle.getHeight());
         } else if (this.imageList != null) {
             surface.drawImage((int)this.rectangle.getUpperLeft().getX(),(int)this.rectangle.getUpperLeft().getY(),
                     this.imageList.get(colorCount));
         } else {
             surface.setColor(this.color);
+            surface.fillRectangle((int) this.rectangle.getUpperLeft().getX(), (int) this.rectangle.getUpperLeft().getY(),
+                    (int) this.rectangle.getWidth(), (int) this.rectangle.getHeight());
         }
 
-        surface.fillRectangle((int) this.rectangle.getUpperLeft().getX(), (int) this.rectangle.getUpperLeft().getY(),
-                (int) this.rectangle.getWidth(), (int) this.rectangle.getHeight());
+
         if (stroke != null) {
             surface.setColor(this.stroke);
         } else {

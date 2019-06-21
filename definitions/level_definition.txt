@@ -1,0 +1,20 @@
+START_LEVEL
+level_name:Tomer's Level
+ball_velocities:4,5 5,5 3,5 3,5
+background:image(background_images/output-onlinejpgtools.jpg)
+paddle_speed:650
+paddle_width:160
+block_definitions:definitions/tomer_level_definitions.txt
+blocks_start_x:25
+blocks_start_y:80
+row_height:25
+num_blocks:26
+START_BLOCKS
+-
+-
+-
+-
+-lllllllllllll--
+-zzzzzzzzzzzzz--
+END_BLOCKS
+END_LEVEL

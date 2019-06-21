@@ -1,27 +1,22 @@
 package menu;
 
-
 import animation.AnimationRunner;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuAnimation<T> implements Menu<T> {
-
-
+public class SubMenuAnimation<T> implements Menu<T> {
     private String menuTitle;
     private KeyboardSensor keyboardSensor;
     private AnimationRunner animationRunner;
     private boolean stop;
     private T status;
     private List<SelectOption<T>> option;
-    //private boolean bool;
 
-
-    public MenuAnimation(String menuTitle1, KeyboardSensor ks, AnimationRunner ar) {
+    public SubMenuAnimation(String menuTitle1, KeyboardSensor ks, AnimationRunner ar) {
         this.menuTitle = menuTitle1;
         this.keyboardSensor = ks;
         this.animationRunner = ar;
@@ -68,7 +63,7 @@ public class MenuAnimation<T> implements Menu<T> {
      */
     @Override
     public void doOneFrame(DrawSurface d) {
-        d.setColor(new Color(58, 205, 255));
+        d.setColor(new Color(185, 118, 255));
         d.fillRectangle(0, 0, 800, 600);
         d.setColor(new Color(24, 118, 150));
         d.fillRectangle(150, 120, 500, 400);
@@ -85,7 +80,6 @@ public class MenuAnimation<T> implements Menu<T> {
                 this.stop = true;
             }
         }
-
     }
 
     /**
@@ -96,9 +90,5 @@ public class MenuAnimation<T> implements Menu<T> {
     @Override
     public boolean shouldStop() {
         return this.stop;
-    }
-
-    public void setStop(boolean stop) {
-        this.stop = stop;
     }
 }

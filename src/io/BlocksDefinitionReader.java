@@ -75,7 +75,12 @@ public class BlocksDefinitionReader {
             if (bdef.containsKey("stroke")) {
                 stroke = ColorParser.colorFromString(bdef.get("stroke"));
             } else {
-                stroke = ColorParser.colorFromString(defaultMap.get("stroke"));
+                if (defaultMap != null){
+                    stroke = ColorParser.colorFromString(defaultMap.get("stroke"));
+                }else {
+                    stroke = Color.black;
+                }
+
             }
             int hitPoint;
             if (bdef.containsKey("hit_points")) {
@@ -115,7 +120,7 @@ public class BlocksDefinitionReader {
             List<Color> colorList = new ArrayList<>();
             if (fillList.get(0).contains("image")){
                 for (String str : fillList){
-                    str = str.substring(5,str.length() - 1);
+                    str = str.substring(6,str.length() - 1);
                     BufferedImage img = null;
                     try {
                         img = ImageIO.read(new File(str));

@@ -15,4 +15,12 @@ public interface Menu<T> extends Animation {
      * @return status
      */
     T getStatus();
+
+    /**
+     * Creates a sub-menu.
+     * @param key .
+     * @param message .
+     * @param subMenu .
+     */
+    void addSubMenu(String key, String message, Menu<T> subMenu);
 }
